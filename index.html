@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NLP Mastery Roadmap — Basic to RLHF</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent1: #00e5ff;
+    --accent2: #ff6b6b;
+    --accent3: #a78bfa;
+    --accent4: #34d399;
+    --accent5: #fbbf24;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --font-head: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: var(–font-mono);
+font-size: 13px;
+line-height: 1.7;
+min-height: 100vh;
+}
+
+/* Grid background */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image:
+linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+background-size: 40px 40px;
+pointer-events: none;
+z-index: 0;
+}
+
+.container {
+max-width: 1100px;
+margin: 0 auto;
+padding: 60px 24px;
+position: relative;
+z-index: 1;
+}
+
+/* HEADER */
+header {
+text-align: center;
+margin-bottom: 80px;
+position: relative;
+}
+
+.header-tag {
+font-family: var(–font-mono);
+font-size: 11px;
+letter-spacing: 4px;
+color: var(–accent1);
+text-transform: uppercase;
+margin-bottom: 16px;
+display: block;
+}
+
+h1 {
+font-family: var(–font-head);
+font-size: clamp(2.5rem, 6vw, 4.5rem);
+font-weight: 800;
+line-height: 1.05;
+letter-spacing: -2px;
+margin-bottom: 20px;
+}
+
+h1 span.grad1 { color: var(–accent1); }
+h1 span.grad2 { color: var(–accent3); }
+
+.header-sub {
+color: var(–muted);
+font-size: 13px;
+max-width: 560px;
+margin: 0 auto 32px;
+line-height: 1.8;
+}
+
+.stats-bar {
+display: flex;
+justify-content: center;
+gap: 40px;
+flex-wrap: wrap;
+margin-top: 36px;
+}
+
+.stat {
+text-align: center;
+}
+.stat-num {
+font-family: var(–font-head);
+font-size: 2rem;
+font-weight: 800;
+color: var(–accent1);
+display: block;
+}
+.stat-label {
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–muted);
+}
+
+/* PHASE HEADER */
+.phase {
+margin-bottom: 56px;
+}
+
+.phase-header {
+display: flex;
+align-items: center;
+gap: 16px;
+margin-bottom: 24px;
+padding-bottom: 16px;
+border-bottom: 1px solid var(–border);
+}
+
+.phase-num {
+font-family: var(–font-head);
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 3px;
+text-transform: uppercase;
+padding: 4px 12px;
+border-radius: 2px;
+white-space: nowrap;
+}
+
+.phase-title {
+font-family: var(–font-head);
+font-size: 1.5rem;
+font-weight: 700;
+letter-spacing: -0.5px;
+}
+
+.phase-duration {
+margin-left: auto;
+font-size: 11px;
+color: var(–muted);
+letter-spacing: 1px;
+white-space: nowrap;
+}
+
+/* COLOR VARIANTS */
+.p1 .phase-num { background: rgba(0,229,255,0.12); color: var(–accent1); }
+.p1 .phase-title { color: var(–accent1); }
+.p2 .phase-num { background: rgba(167,139,250,0.12); color: var(–accent3); }
+.p2 .phase-title { color: var(–accent3); }
+.p3 .phase-num { background: rgba(52,211,153,0.12); color: var(–accent4); }
+.p3 .phase-title { color: var(–accent4); }
+.p4 .phase-num { background: rgba(251,191,36,0.12); color: var(–accent5); }
+.p4 .phase-title { color: var(–accent5); }
+.p5 .phase-num { background: rgba(255,107,107,0.12); color: var(–accent2); }
+.p5 .phase-title { color: var(–accent2); }
+.p6 .phase-num { background: rgba(0,229,255,0.12); color: var(–accent1); }
+.p6 .phase-title { color: var(–accent1); }
+.p7 .phase-num { background: rgba(167,139,250,0.12); color: var(–accent3); }
+.p7 .phase-title { color: var(–accent3); }
+.p8 .phase-num { background: rgba(52,211,153,0.12); color: var(–accent4); }
+.p8 .phase-title { color: var(–accent4); }
+
+/* TOPIC GRID */
+.topic-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 16px;
+}
+
+.topic-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 20px;
+transition: border-color 0.2s, transform 0.2s;
+position: relative;
+overflow: hidden;
+}
+
+.topic-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 2px;
+}
+
+.p1 .topic-card::before { background: var(–accent1); }
+.p2 .topic-card::before { background: var(–accent3); }
+.p3 .topic-card::before { background: var(–accent4); }
+.p4 .topic-card::before { background: var(–accent5); }
+.p5 .topic-card::before { background: var(–accent2); }
+.p6 .topic-card::before { background: var(–accent1); }
+.p7 .topic-card::before { background: var(–accent3); }
+.p8 .topic-card::before { background: var(–accent4); }
+
+.topic-card:hover {
+border-color: rgba(255,255,255,0.15);
+transform: translateY(-2px);
+}
+
+.topic-name {
+font-family: var(–font-head);
+font-size: 0.9rem;
+font-weight: 700;
+margin-bottom: 8px;
+color: var(–text);
+}
+
+.topic-desc {
+color: var(–muted);
+font-size: 11.5px;
+line-height: 1.7;
+margin-bottom: 14px;
+}
+
+.subtopics {
+display: flex;
+flex-wrap: wrap;
+gap: 6px;
+margin-bottom: 14px;
+}
+
+.subtopic {
+font-size: 10px;
+padding: 3px 8px;
+border-radius: 2px;
+background: var(–surface2);
+color: var(–muted);
+border: 1px solid var(–border);
+letter-spacing: 0.5px;
+}
+
+.resources {
+border-top: 1px solid var(–border);
+padding-top: 12px;
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+
+.resource {
+display: flex;
+align-items: flex-start;
+gap: 8px;
+font-size: 11px;
+color: var(–muted);
+}
+
+.resource a {
+color: inherit;
+text-decoration: none;
+transition: color 0.15s;
+word-break: break-word;
+}
+
+.resource a:hover { color: var(–text); }
+
+.res-type {
+font-size: 9px;
+padding: 2px 6px;
+border-radius: 2px;
+white-space: nowrap;
+flex-shrink: 0;
+letter-spacing: 0.5px;
+font-weight: 700;
+}
+
+.res-yt { background: rgba(255,107,107,0.15); color: #ff6b6b; }
+.res-book { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.res-course { background: rgba(167,139,250,0.15); color: #a78bfa; }
+.res-paper { background: rgba(52,211,153,0.15); color: #34d399; }
+.res-blog { background: rgba(0,229,255,0.15); color: #00e5ff; }
+.res-github { background: rgba(255,255,255,0.08); color: #ccc; }
+
+/* TIMELINE */
+.timeline-bar {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 32px;
+margin-bottom: 56px;
+}
+
+.tl-title {
+font-family: var(–font-head);
+font-size: 1rem;
+font-weight: 700;
+margin-bottom: 24px;
+color: var(–accent1);
+letter-spacing: -0.3px;
+}
+
+.tl-phases {
+display: flex;
+gap: 4px;
+height: 32px;
+border-radius: 4px;
+overflow: hidden;
+margin-bottom: 12px;
+}
+
+.tl-seg {
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 0.5px;
+transition: flex 0.3s;
+}
+
+.tl-labels {
+display: flex;
+gap: 16px;
+flex-wrap: wrap;
+margin-top: 16px;
+}
+
+.tl-label {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 11px;
+color: var(–muted);
+}
+
+.tl-dot {
+width: 8px;
+height: 8px;
+border-radius: 1px;
+flex-shrink: 0;
+}
+
+/* DIVIDER */
+.section-divider {
+border: none;
+border-top: 1px solid var(–border);
+margin: 48px 0;
+}
+
+/* FOOTER */
+footer {
+text-align: center;
+padding: 40px 0 20px;
+color: var(–muted);
+font-size: 11px;
+letter-spacing: 1px;
+}
+
+footer span { color: var(–accent1); }
+
+@media (max-width: 600px) {
+.topic-grid { grid-template-columns: 1fr; }
+.phase-header { flex-wrap: wrap; }
+.phase-duration { margin-left: 0; }
+.stats-bar { gap: 24px; }
+h1 { font-size: 2rem; }
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+
+  <header>
+    <span class="header-tag">// Complete Learning Roadmap</span>
+    <h1><span class="grad1">NLP</span> to <span class="grad2">Reasoning</span><br>Models</h1>
+    <p class="header-sub">A comprehensive, sequenced curriculum from linear algebra fundamentals to RLHF & Constitutional AI — everything you need to build a Claude-equivalent system.</p>
+    <div class="stats-bar">
+      <div class="stat"><span class="stat-num">8</span><span class="stat-label">Phases</span></div>
+      <div class="stat"><span class="stat-num">60+</span><span class="stat-label">Topics</span></div>
+      <div class="stat"><span class="stat-num">~18</span><span class="stat-label">Months</span></div>
+      <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Resources</span></div>
+    </div>
+  </header>
+
+  <!-- TIMELINE -->
+
+  <div class="timeline-bar">
+    <div class="tl-title">// Estimated Timeline Overview</div>
+    <div class="tl-phases">
+      <div class="tl-seg" style="flex:1;background:rgba(0,229,255,0.25);color:#00e5ff;">P1</div>
+      <div class="tl-seg" style="flex:1;background:rgba(167,139,250,0.25);color:#a78bfa;">P2</div>
+      <div class="tl-seg" style="flex:2;background:rgba(52,211,153,0.25);color:#34d399;">P3</div>
+      <div class="tl-seg" style="flex:2;background:rgba(251,191,36,0.25);color:#fbbf24;">P4</div>
+      <div class="tl-seg" style="flex:3;background:rgba(255,107,107,0.25);color:#ff6b6b;">P5</div>
+      <div class="tl-seg" style="flex:3;background:rgba(0,229,255,0.2);color:#00e5ff;">P6</div>
+      <div class="tl-seg" style="flex:3;background:rgba(167,139,250,0.2);color:#a78bfa;">P7</div>
+      <div class="tl-seg" style="flex:3;background:rgba(52,211,153,0.2);color:#34d399;">P8</div>
+    </div>
+    <div class="tl-labels">
+      <div class="tl-label"><div class="tl-dot" style="background:#00e5ff;"></div>P1: Math Foundations (3w)</div>
+      <div class="tl-label"><div class="tl-dot" style="background:#a78bfa;"></div>P2: Classic NLP (3w)</div>
+      <div class="tl-label"><div class="tl-dot" style="background:#34d399;"></div>P3: Deep Learning for NLP (6w)</div>
+      <div class="tl-label"><div class="tl-dot" style="background:#fbbf24;"></div>P4: Transformers (6w)</div>
+      <div class="tl-label"><div class="tl-dot" style="background:#ff6b6b;"></div>P5: Pre-training LLMs (8w)</div>
+      <div class="tl-label"><div class="tl-dot" style="background:#00e5ff;"></div>P6: Fine-tuning & Alignment (8w)</div>
+      <div class="tl-label"><div class="tl-dot" style="background:#a78bfa;"></div>P7: RLHF & Constitutional AI (8w)</div>
+      <div class="tl-label"><div class="tl-dot" style="background:#34d399;"></div>P8: Reasoning & Frontier (6w)</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 1 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p1">
+    <div class="phase-header">
+      <span class="phase-num">Phase 01</span>
+      <span class="phase-title">Mathematical Foundations</span>
+      <span class="phase-duration">~3 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Linear Algebra for NLP</div>
+    <div class="topic-desc">The language of vectors, matrices, and tensor operations that underpins every embedding and weight matrix.</div>
+    <div class="subtopics">
+      <span class="subtopic">Vectors & Dot Products</span>
+      <span class="subtopic">Matrix Multiplication</span>
+      <span class="subtopic">Eigenvalues/Eigenvectors</span>
+      <span class="subtopic">SVD & PCA</span>
+      <span class="subtopic">Tensor Operations</span>
+      <span class="subtopic">Norms & Distance Metrics</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3Blue1Brown — Essence of Linear Algebra</a></div>
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://mml-book.github.io/">Mathematics for Machine Learning (Deisenroth) — Free PDF</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/specializations/mathematics-machine-learning">Coursera: Mathematics for ML Specialization</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Probability & Statistics</div>
+    <div class="topic-desc">Probability theory is the backbone of language modeling — from MLE to Bayesian inference.</div>
+    <div class="subtopics">
+      <span class="subtopic">Probability Distributions</span>
+      <span class="subtopic">Bayes' Theorem</span>
+      <span class="subtopic">MLE & MAP</span>
+      <span class="subtopic">KL Divergence</span>
+      <span class="subtopic">Information Theory</span>
+      <span class="subtopic">Cross-Entropy</span>
+      <span class="subtopic">Perplexity</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@statquest">StatQuest with Josh Starmer (YouTube)</a></div>
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="http://www.deeplearningbook.org/">Deep Learning Book — Ch. 3 (Goodfellow)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://betterexplained.com/articles/information-entropy/">BetterExplained: Information Entropy</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Calculus & Optimization</div>
+    <div class="topic-desc">Gradients, chain rule, and optimization algorithms are how neural networks actually learn.</div>
+    <div class="subtopics">
+      <span class="subtopic">Partial Derivatives</span>
+      <span class="subtopic">Chain Rule</span>
+      <span class="subtopic">Gradient Descent</span>
+      <span class="subtopic">Adam / AdaGrad</span>
+      <span class="subtopic">Learning Rate Schedules</span>
+      <span class="subtopic">Jacobians & Hessians</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">3Blue1Brown — Essence of Calculus</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.udemy.com/course/calculus-and-backpropagation/">Udemy: Calculus & Backprop for DL</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 2 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p2">
+    <div class="phase-header">
+      <span class="phase-num">Phase 02</span>
+      <span class="phase-title">Classical NLP</span>
+      <span class="phase-duration">~3 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Text Preprocessing</div>
+    <div class="topic-desc">Foundation pipeline steps before any model sees the text.</div>
+    <div class="subtopics">
+      <span class="subtopic">Tokenization</span>
+      <span class="subtopic">Stemming & Lemmatization</span>
+      <span class="subtopic">Stop Words</span>
+      <span class="subtopic">POS Tagging</span>
+      <span class="subtopic">Named Entity Recognition</span>
+      <span class="subtopic">Dependency Parsing</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://www.nltk.org/book/">NLTK Book — Free Online</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/specializations/natural-language-processing">Coursera: NLP Specialization (DeepLearning.AI)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://spacy.io/usage/linguistic-features">spaCy Docs: Linguistic Features</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Text Representation</div>
+    <div class="topic-desc">How to convert text into numbers — the classic approaches before neural embeddings.</div>
+    <div class="subtopics">
+      <span class="subtopic">Bag of Words (BoW)</span>
+      <span class="subtopic">TF-IDF</span>
+      <span class="subtopic">N-gram Models</span>
+      <span class="subtopic">Co-occurrence Matrices</span>
+      <span class="subtopic">PMI / PPMI</span>
+      <span class="subtopic">Latent Semantic Analysis</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://web.stanford.edu/~jurafsky/slp3/">Speech & Language Processing — Jurafsky & Martin (Free)</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=D2V1okCEsiE">Stanford CS224N Lecture 1 (YouTube)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Language Models (N-gram)</div>
+    <div class="topic-desc">Probabilistic language models — the ancestors of GPT.</div>
+    <div class="subtopics">
+      <span class="subtopic">Unigram / Bigram / Trigram</span>
+      <span class="subtopic">Laplace Smoothing</span>
+      <span class="subtopic">Kneser-Ney Smoothing</span>
+      <span class="subtopic">Perplexity Evaluation</span>
+      <span class="subtopic">Interpolation</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://web.stanford.edu/~jurafsky/slp3/3.pdf">Jurafsky SLP3 — Ch. 3: N-gram Language Models</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=hB2ShMlwTyc">N-gram Language Models Explained (YT)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Classical ML for NLP</div>
+    <div class="topic-desc">Non-neural approaches that still power many production systems.</div>
+    <div class="subtopics">
+      <span class="subtopic">Naive Bayes Classifier</span>
+      <span class="subtopic">Logistic Regression</span>
+      <span class="subtopic">SVM for Text</span>
+      <span class="subtopic">CRF (Conditional Random Fields)</span>
+      <span class="subtopic">HMM for Sequence Labeling</span>
+      <span class="subtopic">Sentiment Analysis</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/specializations/natural-language-processing">DeepLearning.AI NLP Specialization (C1)</a></div>
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://www.oreilly.com/library/view/natural-language-processing/9781491978221/">NLP with Python & spaCy — O'Reilly</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 3 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p3">
+    <div class="phase-header">
+      <span class="phase-num">Phase 03</span>
+      <span class="phase-title">Deep Learning for NLP</span>
+      <span class="phase-duration">~6 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Word Embeddings</div>
+    <div class="topic-desc">The breakthrough that mapped words into dense semantic vector spaces.</div>
+    <div class="subtopics">
+      <span class="subtopic">Word2Vec (Skip-gram / CBOW)</span>
+      <span class="subtopic">GloVe</span>
+      <span class="subtopic">FastText</span>
+      <span class="subtopic">Negative Sampling</span>
+      <span class="subtopic">Embedding Evaluation</span>
+      <span class="subtopic">Analogy Tasks</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1301.3781">Mikolov et al. — Word2Vec (2013)</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=ERibwqs9p38">CS224N Lecture 2: Word Vectors</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/illustrated-word2vec/">Jay Alammar: Illustrated Word2Vec</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">RNNs & Sequence Models</div>
+    <div class="topic-desc">Sequential processing and the vanishing gradient problem that motivated transformers.</div>
+    <div class="subtopics">
+      <span class="subtopic">Vanilla RNN</span>
+      <span class="subtopic">LSTM</span>
+      <span class="subtopic">GRU</span>
+      <span class="subtopic">Bidirectional RNNs</span>
+      <span class="subtopic">Sequence-to-Sequence</span>
+      <span class="subtopic">Teacher Forcing</span>
+      <span class="subtopic">Vanishing Gradients</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Colah's Blog: Understanding LSTMs</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=6niqTuYFZLQ">Andrew Ng: Sequence Models (Coursera YT)</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/learn/nlp-sequence-models">Coursera: Sequence Models (DeepLearning.AI)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Attention Mechanism</div>
+    <div class="topic-desc">The critical innovation that enabled models to selectively focus — precursor to the full transformer.</div>
+    <div class="subtopics">
+      <span class="subtopic">Bahdanau Attention</span>
+      <span class="subtopic">Luong Attention</span>
+      <span class="subtopic">Scaled Dot-Product Attention</span>
+      <span class="subtopic">Attention Scores & Softmax</span>
+      <span class="subtopic">Attention Visualization</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1409.0473">Bahdanau et al. — Neural Machine Translation (2014)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay Alammar: Visualizing Attention</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">CNN for Text</div>
+    <div class="topic-desc">Convolutional filters applied to text for efficient pattern detection and classification.</div>
+    <div class="subtopics">
+      <span class="subtopic">1D Convolution on Text</span>
+      <span class="subtopic">Max Pooling</span>
+      <span class="subtopic">TextCNN Architecture</span>
+      <span class="subtopic">N-gram Feature Extraction</span>
+      <span class="subtopic">Text Classification</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1408.5882">Kim (2014): CNN for Sentence Classification</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://towardsdatascience.com/understanding-how-convolutional-neural-network-cnn-perform-text-classification-with-word-d2ee64b9dd0b">TowardDS: CNN for Text</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Regularization & Training Tricks</div>
+    <div class="topic-desc">Making deep NLP models train reliably and generalize well.</div>
+    <div class="subtopics">
+      <span class="subtopic">Dropout</span>
+      <span class="subtopic">Batch Normalization</span>
+      <span class="subtopic">Layer Normalization</span>
+      <span class="subtopic">Gradient Clipping</span>
+      <span class="subtopic">Weight Initialization</span>
+      <span class="subtopic">Mixed Precision (FP16)</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="http://www.deeplearningbook.org/">Deep Learning Book — Goodfellow et al. Ch. 7</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=NyG-YD1WsMo">Andrej Karpathy: Training NNs (YT)</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 4 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p4">
+    <div class="phase-header">
+      <span class="phase-num">Phase 04</span>
+      <span class="phase-title">The Transformer Architecture</span>
+      <span class="phase-duration">~6 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Original Transformer</div>
+    <div class="topic-desc">"Attention Is All You Need" — the architecture that changed everything in NLP.</div>
+    <div class="subtopics">
+      <span class="subtopic">Encoder-Decoder Structure</span>
+      <span class="subtopic">Multi-Head Self-Attention</span>
+      <span class="subtopic">Positional Encoding</span>
+      <span class="subtopic">Feed-Forward Sublayers</span>
+      <span class="subtopic">Residual Connections</span>
+      <span class="subtopic">Layer Norm</span>
+      <span class="subtopic">Masking</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1706.03762">Vaswani et al. (2017): Attention Is All You Need</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/illustrated-transformer/">Jay Alammar: The Illustrated Transformer</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=4Bdc55j80l8">Yannic Kilcher: Attention Is All You Need</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/karpathy/minGPT">Karpathy: minGPT — Annotated Transformer</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Positional Encodings (Deep Dive)</div>
+    <div class="topic-desc">How transformers represent sequence order without recurrence.</div>
+    <div class="subtopics">
+      <span class="subtopic">Sinusoidal Encodings</span>
+      <span class="subtopic">Learned Positional Embeddings</span>
+      <span class="subtopic">Relative Position Encodings</span>
+      <span class="subtopic">Rotary Embeddings (RoPE)</span>
+      <span class="subtopic">ALiBi</span>
+      <span class="subtopic">Length Generalization</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/">Positional Encoding Deep Dive</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2104.09864">Su et al.: RoFormer — RoPE (2021)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">BERT & Encoder Models</div>
+    <div class="topic-desc">Bidirectional pre-training — how context from both directions revolutionized NLU.</div>
+    <div class="subtopics">
+      <span class="subtopic">Masked Language Modeling</span>
+      <span class="subtopic">Next Sentence Prediction</span>
+      <span class="subtopic">BERT Fine-tuning</span>
+      <span class="subtopic">RoBERTa</span>
+      <span class="subtopic">DistilBERT</span>
+      <span class="subtopic">ALBERT</span>
+      <span class="subtopic">DeBERTa</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1810.04805">Devlin et al.: BERT (2018)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/illustrated-bert/">Jay Alammar: Illustrated BERT</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://huggingface.co/course/chapter1/1">HuggingFace NLP Course (Free)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">GPT & Decoder Models</div>
+    <div class="topic-desc">Autoregressive language modeling — the foundation of ChatGPT, Claude, and Gemini.</div>
+    <div class="subtopics">
+      <span class="subtopic">Causal (Autoregressive) LM</span>
+      <span class="subtopic">GPT-1/2/3 Architecture Evolution</span>
+      <span class="subtopic">Causal Masking</span>
+      <span class="subtopic">In-Context Learning</span>
+      <span class="subtopic">Few-Shot Prompting</span>
+      <span class="subtopic">Zero-Shot Generalization</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://openai.com/research/language-unsupervised">Radford et al.: GPT-1 (2018)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2005.14165">Brown et al.: GPT-3 (2020)</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=kCc8FmEb1nY">Karpathy: Let's Build GPT (3h video)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">T5 & Encoder-Decoder Models</div>
+    <div class="topic-desc">Text-to-Text Transfer Transformer — unifying all NLP tasks as text generation.</div>
+    <div class="subtopics">
+      <span class="subtopic">T5 Architecture</span>
+      <span class="subtopic">Span Corruption Objective</span>
+      <span class="subtopic">BART</span>
+      <span class="subtopic">mT5 (Multilingual)</span>
+      <span class="subtopic">Seq2Seq Fine-tuning</span>
+      <span class="subtopic">Summarization / Translation</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1910.10683">Raffel et al.: T5 (2019)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/model_doc/t5">HuggingFace T5 Docs</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Tokenization (Advanced)</div>
+    <div class="topic-desc">Subword tokenization strategies used in every modern LLM.</div>
+    <div class="subtopics">
+      <span class="subtopic">BPE (Byte-Pair Encoding)</span>
+      <span class="subtopic">WordPiece</span>
+      <span class="subtopic">SentencePiece / Unigram LM</span>
+      <span class="subtopic">Byte-level BPE (GPT-2)</span>
+      <span class="subtopic">Tiktoken</span>
+      <span class="subtopic">Vocabulary Design</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/tokenizer_summary">HuggingFace: Tokenizer Summary</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=zduSFxRajkE">Karpathy: Let's Build the GPT Tokenizer</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 5 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p5">
+    <div class="phase-header">
+      <span class="phase-num">Phase 05</span>
+      <span class="phase-title">Pre-training Large Language Models</span>
+      <span class="phase-duration">~8 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Scaling Laws</div>
+    <div class="topic-desc">How model size, data, and compute interact — the empirical laws guiding LLM development.</div>
+    <div class="subtopics">
+      <span class="subtopic">Kaplan Scaling Laws</span>
+      <span class="subtopic">Chinchilla Scaling</span>
+      <span class="subtopic">Compute-Optimal Training</span>
+      <span class="subtopic">Loss vs. Parameters</span>
+      <span class="subtopic">Emergent Abilities</span>
+      <span class="subtopic">Data Scaling</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2001.08361">Kaplan et al.: Scaling Laws for NLMs (2020)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2203.15556">Hoffmann et al.: Chinchilla (2022)</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=UFem7xa3Q2Q">Scaling Laws Explained (YT)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Data Collection & Curation</div>
+    <div class="topic-desc">The data pipeline that feeds LLM pre-training — quality matters more than quantity.</div>
+    <div class="subtopics">
+      <span class="subtopic">Common Crawl Processing</span>
+      <span class="subtopic">Deduplication (MinHash)</span>
+      <span class="subtopic">Quality Filtering</span>
+      <span class="subtopic">Data Mixing Ratios</span>
+      <span class="subtopic">The Pile / RedPajama</span>
+      <span class="subtopic">Toxic Content Filtering</span>
+      <span class="subtopic">Domain-Specific Data</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2101.00027">Gao et al.: The Pile (2021)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/curated-data">HuggingFace: Curating Data for LLMs</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Distributed Training</div>
+    <div class="topic-desc">Training LLMs requires spreading work across hundreds of GPUs.</div>
+    <div class="subtopics">
+      <span class="subtopic">Data Parallelism</span>
+      <span class="subtopic">Model Parallelism</span>
+      <span class="subtopic">Pipeline Parallelism</span>
+      <span class="subtopic">Tensor Parallelism</span>
+      <span class="subtopic">ZeRO / DeepSpeed</span>
+      <span class="subtopic">FSDP (PyTorch)</span>
+      <span class="subtopic">Gradient Accumulation</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/perf_train_gpu_many">HuggingFace: Training on Many GPUs</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1910.02054">Rajbhandari et al.: ZeRO (2019)</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/microsoft/DeepSpeed">Microsoft DeepSpeed GitHub</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Efficient Architectures</div>
+    <div class="topic-desc">Architectural innovations to make transformers faster and handle longer contexts.</div>
+    <div class="subtopics">
+      <span class="subtopic">Sparse Attention</span>
+      <span class="subtopic">Longformer / BigBird</span>
+      <span class="subtopic">Flash Attention (v1/v2/v3)</span>
+      <span class="subtopic">Grouped Query Attention (GQA)</span>
+      <span class="subtopic">Multi-Query Attention (MQA)</span>
+      <span class="subtopic">Mixture of Experts (MoE)</span>
+      <span class="subtopic">KV Cache</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2205.14135">Dao et al.: FlashAttention (2022)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/">Lilian Weng: Transformer Family v2</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">LLaMA / Open LLMs</div>
+    <div class="topic-desc">Study the open-source model architectures that power most research today.</div>
+    <div class="subtopics">
+      <span class="subtopic">LLaMA Architecture</span>
+      <span class="subtopic">RMSNorm</span>
+      <span class="subtopic">SwiGLU Activation</span>
+      <span class="subtopic">Mistral / Mixtral</span>
+      <span class="subtopic">Falcon, MPT, Qwen</span>
+      <span class="subtopic">Gemma Architecture</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2302.13971">Touvron et al.: LLaMA (2023)</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/meta-llama/llama">Meta LLaMA GitHub</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=oM4VmoabDAI">Umar Jamil: LLaMA from Scratch</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Inference & Generation</div>
+    <div class="topic-desc">How trained LLMs produce text — sampling strategies and decoding algorithms.</div>
+    <div class="subtopics">
+      <span class="subtopic">Greedy Decoding</span>
+      <span class="subtopic">Beam Search</span>
+      <span class="subtopic">Top-k Sampling</span>
+      <span class="subtopic">Top-p (Nucleus) Sampling</span>
+      <span class="subtopic">Temperature</span>
+      <span class="subtopic">Speculative Decoding</span>
+      <span class="subtopic">Repetition Penalties</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/how-to-generate">HuggingFace: How to Generate Text</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://towardsdatascience.com/the-ultimate-guide-to-text-generation-with-language-models-5d2ef8fc8e30">Decoding Strategies Guide</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 6 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p6">
+    <div class="phase-header">
+      <span class="phase-num">Phase 06</span>
+      <span class="phase-title">Fine-tuning, Instruction Tuning & Alignment</span>
+      <span class="phase-duration">~8 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Supervised Fine-Tuning (SFT)</div>
+    <div class="topic-desc">Adapting pre-trained models to follow instructions using labeled demonstration data.</div>
+    <div class="subtopics">
+      <span class="subtopic">Task-Specific Fine-tuning</span>
+      <span class="subtopic">Instruction Tuning</span>
+      <span class="subtopic">Chat Templates</span>
+      <span class="subtopic">Data Formats (Alpaca, ShareGPT)</span>
+      <span class="subtopic">Overfitting & Catastrophic Forgetting</span>
+      <span class="subtopic">Multi-task Fine-tuning</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2109.01652">Wei et al.: Finetuned LMs Are Zero-Shot Learners</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/instruction-tuning-sd">HuggingFace: Instruction Tuning</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/tatsu-lab/stanford_alpaca">Stanford Alpaca GitHub</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Parameter-Efficient Fine-tuning (PEFT)</div>
+    <div class="topic-desc">Fine-tune only a tiny fraction of parameters while matching full fine-tune quality.</div>
+    <div class="subtopics">
+      <span class="subtopic">LoRA (Low-Rank Adaptation)</span>
+      <span class="subtopic">QLoRA (4-bit LoRA)</span>
+      <span class="subtopic">Prefix Tuning</span>
+      <span class="subtopic">Prompt Tuning</span>
+      <span class="subtopic">Adapter Layers</span>
+      <span class="subtopic">IA³</span>
+      <span class="subtopic">DoRA</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2106.09685">Hu et al.: LoRA (2021)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2305.14314">Dettmers et al.: QLoRA (2023)</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/huggingface/peft">HuggingFace PEFT Library</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=Us5ZFp16PaU">LoRA Fine-tuning Explained (YT)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Quantization & Model Compression</div>
+    <div class="topic-desc">Reducing model size and inference cost without major quality loss.</div>
+    <div class="subtopics">
+      <span class="subtopic">INT8 / INT4 Quantization</span>
+      <span class="subtopic">GPTQ</span>
+      <span class="subtopic">AWQ</span>
+      <span class="subtopic">bitsandbytes</span>
+      <span class="subtopic">GGUF / llama.cpp</span>
+      <span class="subtopic">Knowledge Distillation</span>
+      <span class="subtopic">Pruning</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/quantization">HuggingFace: Quantization Guide</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/ggerganov/llama.cpp">llama.cpp GitHub</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Prompt Engineering</div>
+    <div class="topic-desc">Systematic techniques for eliciting the best behavior from LLMs without weight updates.</div>
+    <div class="subtopics">
+      <span class="subtopic">Zero-shot / Few-shot</span>
+      <span class="subtopic">Chain-of-Thought (CoT)</span>
+      <span class="subtopic">Self-Consistency</span>
+      <span class="subtopic">Tree of Thoughts (ToT)</span>
+      <span class="subtopic">ReAct</span>
+      <span class="subtopic">Structured Output Prompting</span>
+      <span class="subtopic">System Prompts</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2201.11903">Wei et al.: Chain-of-Thought Prompting</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.promptingguide.ai/">DAIR.AI: Prompt Engineering Guide</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://learnprompting.org/">LearnPrompting.org (Free)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Retrieval Augmented Generation (RAG)</div>
+    <div class="topic-desc">Augmenting LLM knowledge with retrieved documents at inference time.</div>
+    <div class="subtopics">
+      <span class="subtopic">Dense Retrieval</span>
+      <span class="subtopic">Bi-encoder / Cross-encoder</span>
+      <span class="subtopic">Vector Databases (FAISS, Chroma, Pinecone)</span>
+      <span class="subtopic">Chunking Strategies</span>
+      <span class="subtopic">Hybrid Retrieval (BM25 + Dense)</span>
+      <span class="subtopic">Re-ranking</span>
+      <span class="subtopic">Advanced RAG</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2005.11401">Lewis et al.: RAG (2020)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.llamaindex.ai/blog/the-a-complete-guide-to-understanding-rag-retrieval-augmented-generation">LlamaIndex: Complete RAG Guide</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=T-D1OfcDW1M">RAG from Scratch (LangChain YT)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">LLM Evaluation</div>
+    <div class="topic-desc">How to rigorously measure what LLMs can and can't do.</div>
+    <div class="subtopics">
+      <span class="subtopic">MMLU / HellaSwag / ARC</span>
+      <span class="subtopic">BLEU / ROUGE / METEOR</span>
+      <span class="subtopic">BERTScore</span>
+      <span class="subtopic">LLM-as-Judge</span>
+      <span class="subtopic">Chatbot Arena (ELO)</span>
+      <span class="subtopic">Safety Evals</span>
+      <span class="subtopic">Benchmark Contamination</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/evaluating-llms">HuggingFace: Evaluating LLMs</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/EleutherAI/lm-evaluation-harness">EleutherAI: LM Eval Harness</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 7 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p7">
+    <div class="phase-header">
+      <span class="phase-num">Phase 07</span>
+      <span class="phase-title">RLHF, RLAIF & Constitutional AI</span>
+      <span class="phase-duration">~8 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Reinforcement Learning Foundations</div>
+    <div class="topic-desc">The RL toolkit you need before applying it to language model alignment.</div>
+    <div class="subtopics">
+      <span class="subtopic">Markov Decision Processes</span>
+      <span class="subtopic">Policy & Value Functions</span>
+      <span class="subtopic">Policy Gradient (REINFORCE)</span>
+      <span class="subtopic">PPO (Proximal Policy Optimization)</span>
+      <span class="subtopic">Advantage Functions</span>
+      <span class="subtopic">KL Divergence Penalty</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-book">BOOK</span><a href="http://incompleteideas.net/book/the-book-2nd.html">Sutton & Barto: RL (Free PDF)</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://huggingface.co/learn/deep-rl-course/unit0/introduction">HuggingFace Deep RL Course (Free)</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=2pWv7GOvuf0">Spinning Up in RL: Policy Gradients (YT)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Reward Modeling</div>
+    <div class="topic-desc">Training a separate model to score LLM outputs according to human preferences.</div>
+    <div class="subtopics">
+      <span class="subtopic">Preference Data Collection</span>
+      <span class="subtopic">Bradley-Terry Model</span>
+      <span class="subtopic">Reward Model Architecture</span>
+      <span class="subtopic">Ranking vs. Scoring</span>
+      <span class="subtopic">Reward Hacking</span>
+      <span class="subtopic">Reward Model Ensembling</span>
+      <span class="subtopic">Process vs. Outcome Reward</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2203.02155">Ouyang et al.: InstructGPT / RLHF (2022)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/rlhf">HuggingFace: Illustrating RLHF</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=2MBJOuVq380">RLHF Explained: Nathan Lambert (YT)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">RLHF Pipeline (Full)</div>
+    <div class="topic-desc">The complete 3-stage pipeline: SFT → Reward Model → PPO fine-tuning.</div>
+    <div class="subtopics">
+      <span class="subtopic">Stage 1: SFT on demonstrations</span>
+      <span class="subtopic">Stage 2: Reward model training</span>
+      <span class="subtopic">Stage 3: PPO with KL penalty</span>
+      <span class="subtopic">Reference Policy Freezing</span>
+      <span class="subtopic">Reward Normalization</span>
+      <span class="subtopic">Stability Tricks</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/huggingface/trl">HuggingFace TRL Library (RLHF/PPO)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://wandb.ai/carperai/summarize_RLHF/reports/Implementing-RLHF-Learning-to-Summarize-with-trlX--VmlldzozMzAwODI2">W&B: RLHF Implementation Report</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">DPO & Offline Alignment</div>
+    <div class="topic-desc">Direct Preference Optimization — aligning LLMs without a separate reward model or RL loop.</div>
+    <div class="subtopics">
+      <span class="subtopic">DPO Derivation</span>
+      <span class="subtopic">Implicit Reward</span>
+      <span class="subtopic">IPO (Identity PO)</span>
+      <span class="subtopic">KTO</span>
+      <span class="subtopic">ORPO</span>
+      <span class="subtopic">SimPO</span>
+      <span class="subtopic">Online vs. Offline DPO</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2305.18290">Rafailov et al.: DPO (2023)</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=XZLc09hkMwA">DPO Paper Explained (Yannic Kilcher)</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/huggingface/trl">TRL DPOTrainer Example</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Constitutional AI (CAI)</div>
+    <div class="topic-desc">Anthropic's framework for training AI to be helpful, harmless, and honest using AI feedback.</div>
+    <div class="subtopics">
+      <span class="subtopic">Constitutional Principles</span>
+      <span class="subtopic">Critique & Revision</span>
+      <span class="subtopic">RLAIF (AI Feedback)</span>
+      <span class="subtopic">Harmlessness vs. Helpfulness Trade-off</span>
+      <span class="subtopic">Supervised CAI Stage</span>
+      <span class="subtopic">RL from AI Feedback Stage</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2212.08073">Bai et al.: Constitutional AI (2022)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback">Anthropic: CAI Blog Post</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=jhCEZyNjJJQ">Constitutional AI Explained (YT)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">RLAIF & Scalable Oversight</div>
+    <div class="topic-desc">Using AI models as evaluators to scale alignment beyond what human raters can provide.</div>
+    <div class="subtopics">
+      <span class="subtopic">AI as Judge / Evaluator</span>
+      <span class="subtopic">Debate</span>
+      <span class="subtopic">Amplification</span>
+      <span class="subtopic">Recursive Reward Modeling</span>
+      <span class="subtopic">Weak-to-Strong Generalization</span>
+      <span class="subtopic">Scalable Oversight Problems</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2309.00267">Lee et al.: RLAIF (2023)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2312.09390">Burns et al.: Weak-to-Strong Generalization</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://openai.com/research/debate">OpenAI: AI Safety via Debate</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Safety & Red-Teaming</div>
+    <div class="topic-desc">Proactively finding and fixing failure modes before deployment.</div>
+    <div class="subtopics">
+      <span class="subtopic">Red-Teaming Methodology</span>
+      <span class="subtopic">Jailbreaking & Prompt Injection</span>
+      <span class="subtopic">Adversarial Prompts</span>
+      <span class="subtopic">Automated Red-Teaming</span>
+      <span class="subtopic">Toxicity / Bias Evaluation</span>
+      <span class="subtopic">Responsible Scaling Policies</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2209.07858">Ganguli et al.: Red Teaming LLMs (Anthropic)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/">Lilian Weng: Adversarial Attacks on LLMs</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Alignment Theory</div>
+    <div class="topic-desc">The deeper theoretical foundations of what it means for an AI to be aligned.</div>
+    <div class="subtopics">
+      <span class="subtopic">Goodhart's Law</span>
+      <span class="subtopic">Mesa-Optimization</span>
+      <span class="subtopic">Deceptive Alignment</span>
+      <span class="subtopic">Reward Misspecification</span>
+      <span class="subtopic">Corrigibility</span>
+      <span class="subtopic">Value Extrapolation</span>
+      <span class="subtopic">Interpretability as Safety</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.alignmentforum.org/">Alignment Forum (aggregator)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1906.01820">Hubinger et al.: Risks from Learned Optimization</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- PHASE 8 -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="phase p8">
+    <div class="phase-header">
+      <span class="phase-num">Phase 08</span>
+      <span class="phase-title">Reasoning Models & Frontier Systems</span>
+      <span class="phase-duration">~6 weeks</span>
+    </div>
+    <div class="topic-grid">
+
+```
+  <div class="topic-card">
+    <div class="topic-name">Chain-of-Thought & Reasoning</div>
+    <div class="topic-desc">Training models to reason step-by-step before answering — the foundation of o1/Claude 3.5.</div>
+    <div class="subtopics">
+      <span class="subtopic">CoT Prompting vs. CoT Training</span>
+      <span class="subtopic">Scratchpad / Think Tokens</span>
+      <span class="subtopic">Process Reward Models (PRM)</span>
+      <span class="subtopic">Outcome Reward Models (ORM)</span>
+      <span class="subtopic">Math Reasoning (MATH, GSM8K)</span>
+      <span class="subtopic">Code Reasoning</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2203.11171">Kojima et al.: Zero-Shot CoT (2022)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2305.20050">Lightman et al.: Let's Verify Step by Step (PRM)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://openai.com/index/learning-to-reason-with-llms/">OpenAI: Learning to Reason with LLMs (o1)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Test-Time Compute Scaling</div>
+    <div class="topic-desc">The new paradigm: spending more compute at inference time to get better answers.</div>
+    <div class="subtopics">
+      <span class="subtopic">Self-Play RL for Reasoning</span>
+      <span class="subtopic">Monte Carlo Tree Search (MCTS)</span>
+      <span class="subtopic">Best-of-N Sampling</span>
+      <span class="subtopic">Iterative Refinement</span>
+      <span class="subtopic">Inference-Time Scaling Laws</span>
+      <span class="subtopic">DeepSeek-R1</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1 Technical Report (2025)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2408.03314">Snell et al.: Scaling LLM Test-Time Compute</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Tool Use & Agents</div>
+    <div class="topic-desc">LLMs that call APIs, search the web, write code, and interact with environments.</div>
+    <div class="subtopics">
+      <span class="subtopic">Function Calling</span>
+      <span class="subtopic">ReAct Framework</span>
+      <span class="subtopic">Toolformer</span>
+      <span class="subtopic">Multi-Agent Systems</span>
+      <span class="subtopic">Long-Horizon Planning</span>
+      <span class="subtopic">Code Interpreters</span>
+      <span class="subtopic">Memory Systems</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2210.03629">Yao et al.: ReAct (2022)</a></div>
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">Lilian Weng: LLM Powered Autonomous Agents</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/langchain-ai/langchain">LangChain GitHub</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Multimodal LLMs</div>
+    <div class="topic-desc">Extending language models to understand images, audio, and video.</div>
+    <div class="subtopics">
+      <span class="subtopic">Vision Encoders (ViT, CLIP)</span>
+      <span class="subtopic">Cross-Modal Attention</span>
+      <span class="subtopic">LLaVA Architecture</span>
+      <span class="subtopic">Flamingo / PaLI</span>
+      <span class="subtopic">Image Tokenization</span>
+      <span class="subtopic">Instruction Following (Multimodal)</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2304.08485">Liu et al.: LLaVA (2023)</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2204.14198">Alayrac et al.: Flamingo (2022)</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Mechanistic Interpretability</div>
+    <div class="topic-desc">Understanding what's actually happening inside transformer weights — circuits, features, superposition.</div>
+    <div class="subtopics">
+      <span class="subtopic">Attention Head Analysis</span>
+      <span class="subtopic">Circuits Framework</span>
+      <span class="subtopic">Superposition Hypothesis</span>
+      <span class="subtopic">Sparse Autoencoders (SAE)</span>
+      <span class="subtopic">Feature Visualization</span>
+      <span class="subtopic">Activation Patching</span>
+      <span class="subtopic">Probing Classifiers</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://transformer-circuits.pub/">Anthropic: Transformer Circuits Thread</a></div>
+      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2209.11895">Elhage et al.: Toy Models of Superposition</a></div>
+      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://arena3-chapter1-transformer-interp.streamlit.app/">ARENA 3.0: Mechanistic Interpretability</a></div>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name">Build Your Own Mini-Claude</div>
+    <div class="topic-desc">Putting it all together: pre-train a small LM, apply SFT + RLHF, and deploy it.</div>
+    <div class="subtopics">
+      <span class="subtopic">Pre-train a 100M–1B param model</span>
+      <span class="subtopic">Build an instruction dataset</span>
+      <span class="subtopic">Apply LoRA SFT</span>
+      <span class="subtopic">Train a reward model</span>
+      <span class="subtopic">Run DPO/PPO</span>
+      <span class="subtopic">Evaluate on benchmarks</span>
+      <span class="subtopic">Deploy with vLLM / Ollama</span>
+    </div>
+    <div class="resources">
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/karpathy/nanoGPT">Karpathy: nanoGPT</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/OpenLMLab/MOSS-RLHF">MOSS-RLHF: Open RLHF Pipeline</a></div>
+      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/vllm-project/vllm">vLLM: Fast LLM Serving</a></div>
+      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=l8pRSuU81PU">Karpathy: Reproduce GPT-2 (124M)</a></div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- KEY BOOKS SECTION -->
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:32px;margin-bottom:48px;">
+    <div style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--accent5);margin-bottom:20px;letter-spacing:-0.3px;">// Essential Books — Read in Order</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;">
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
+        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">01 — FOUNDATIONS</div>
+        <div style="font-size:12px;color:var(--text);">Deep Learning — Goodfellow, Bengio & Courville</div>
+        <div style="font-size:11px;color:var(--muted);">deeplearningbook.org (free)</div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
+        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">02 — NLP CORE</div>
+        <div style="font-size:12px;color:var(--text);">Speech & Language Processing — Jurafsky & Martin</div>
+        <div style="font-size:11px;color:var(--muted);">web.stanford.edu/~jurafsky/slp3 (free)</div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
+        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">03 — TRANSFORMERS</div>
+        <div style="font-size:12px;color:var(--text);">Natural Language Processing with Transformers — Tunstall et al.</div>
+        <div style="font-size:11px;color:var(--muted);">O'Reilly (HuggingFace book)</div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
+        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">04 — ALIGNMENT</div>
+        <div style="font-size:12px;color:var(--text);">Reinforcement Learning from Human Feedback — Nathan Lambert</div>
+        <div style="font-size:11px;color:var(--muted);">rlhfbook.com (free)</div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
+        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">05 — MATH</div>
+        <div style="font-size:12px;color:var(--text);">Mathematics for Machine Learning — Deisenroth et al.</div>
+        <div style="font-size:11px;color:var(--muted);">mml-book.github.io (free)</div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
+        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">06 — PRODUCTION</div>
+        <div style="font-size:12px;color:var(--text);">Designing Machine Learning Systems — Chip Huyen</div>
+        <div style="font-size:11px;color:var(--muted);">O'Reilly</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUST-FOLLOW BLOGS -->
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:32px;margin-bottom:48px;">
+    <div style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:-0.3px;">// Must-Follow Blogs & Channels</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;">
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/">Lilian Weng's Blog</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/">Jay Alammar's Blog</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://sebastianraschka.com/blog/">Sebastian Raschka's Blog</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@AndrejKarpathy">Andrej Karpathy (YouTube)</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@YannicKilcher">Yannic Kilcher (YouTube)</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@umarjamilai">Umar Jamil (YouTube)</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@AICoffeeBreak">AI Coffee Break (YouTube)</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://www.interconnects.ai/">Nathan Lambert: Interconnects</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://newsletter.ruder.io/">Sebastian Ruder NLP Newsletter</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://transformer-circuits.pub/">Anthropic: Transformer Circuits</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-course">COURSE</span><a href="https://cs224n.stanford.edu/">Stanford CS224N: NLP with Deep Learning</a></div>
+      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-course">COURSE</span><a href="https://fullstackdeeplearning.com/">Full Stack Deep Learning (Free)</a></div>
+    </div>
+  </div>
+
+  <footer>
+    Built for the serious practitioner &nbsp;|&nbsp; <span>NLP → Reasoning Models Roadmap</span> &nbsp;|&nbsp; ~18 months to mastery
+  </footer>
+
+</div>
+</body>
+</html>
