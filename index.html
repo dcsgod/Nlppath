@@ -1,1451 +1,1258 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NLP Mastery Roadmap — Basic to RLHF</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>NLP → Reasoning Model Mastery Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #1a1a24;
-    --border: #2a2a3a;
-    --accent1: #00e5ff;
-    --accent2: #ff6b6b;
-    --accent3: #a78bfa;
-    --accent4: #34d399;
-    --accent5: #fbbf24;
-    --text: #e8e8f0;
-    --muted: #6b6b80;
-    --font-head: 'Syne', sans-serif;
-    --font-mono: 'Space Mono', monospace;
+    --bg: #07080a;
+    --bg2: #0d0f12;
+    --bg3: #12151a;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #21282f;
+    --border2: #2d3748;
+    --text: #e8edf5;
+    --text2: #8b96a8;
+    --text3: #4a5568;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --green: #10b981;
+    --orange: #f59e0b;
+    --purple: #8b5cf6;
+    --pink: #ec4899;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+
+    --cat-math: #f59e0b;
+    --cat-fundamentals: #10b981;
+    --cat-classical: #06b6d4;
+    --cat-embeddings: #8b5cf6;
+    --cat-neural: #3b82f6;
+    --cat-transformers: #ec4899;
+    --cat-llm: #f97316;
+    --cat-training: #84cc16;
+    --cat-finetuning: #a78bfa;
+    --cat-rl: #fb923c;
+    --cat-reasoning: #34d399;
+    --cat-generation: #38bdf8;
+    --cat-applications: #fb7185;
+    --cat-multimodal: #c084fc;
+    --cat-deployment: #fbbf24;
+    --cat-agents: #4ade80;
+    --cat-eval: #f472b6;
+    --cat-interpretability: #818cf8;
+    --cat-advanced: #e879f9;
+    --cat-courses: #67e8f9;
+    --cat-blogs: #86efac;
+    --cat-youtube: #fca5a5;
+    --cat-tools: #d1d5db;
   }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-background: var(–bg);
-color: var(–text);
-font-family: var(–font-mono);
-font-size: 13px;
-line-height: 1.7;
-min-height: 100vh;
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/* Grid background */
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image:
-linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-background-size: 40px 40px;
-pointer-events: none;
-z-index: 0;
-}
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
 
-.container {
-max-width: 1100px;
-margin: 0 auto;
-padding: 60px 24px;
-position: relative;
-z-index: 1;
-}
+  /* ─── HEADER ─── */
+  header {
+    position: relative;
+    padding: 80px 60px 60px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
 
-/* HEADER */
-header {
-text-align: center;
-margin-bottom: 80px;
-position: relative;
-}
+  .header-glow {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.08) 40%, transparent 70%);
+    pointer-events: none;
+  }
 
-.header-tag {
-font-family: var(–font-mono);
-font-size: 11px;
-letter-spacing: 4px;
-color: var(–accent1);
-text-transform: uppercase;
-margin-bottom: 16px;
-display: block;
-}
+  .header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-h1 {
-font-family: var(–font-head);
-font-size: clamp(2.5rem, 6vw, 4.5rem);
-font-weight: 800;
-line-height: 1.05;
-letter-spacing: -2px;
-margin-bottom: 20px;
-}
+  .header-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
 
-h1 span.grad1 { color: var(–accent1); }
-h1 span.grad2 { color: var(–accent3); }
+  h1 {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #e8edf5 0%, #8b96a8 60%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
 
-.header-sub {
-color: var(–muted);
-font-size: 13px;
-max-width: 560px;
-margin: 0 auto 32px;
-line-height: 1.8;
-}
+  .header-sub {
+    font-size: 16px;
+    color: var(--text2);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
 
-.stats-bar {
-display: flex;
-justify-content: center;
-gap: 40px;
-flex-wrap: wrap;
-margin-top: 36px;
-}
+  .stats-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
 
-.stat {
-text-align: center;
-}
-.stat-num {
-font-family: var(–font-head);
-font-size: 2rem;
-font-weight: 800;
-color: var(–accent1);
-display: block;
-}
-.stat-label {
-font-size: 10px;
-letter-spacing: 2px;
-text-transform: uppercase;
-color: var(–muted);
-}
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 
-/* PHASE HEADER */
-.phase {
-margin-bottom: 56px;
-}
+  .stat-num {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
 
-.phase-header {
-display: flex;
-align-items: center;
-gap: 16px;
-margin-bottom: 24px;
-padding-bottom: 16px;
-border-bottom: 1px solid var(–border);
-}
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
 
-.phase-num {
-font-family: var(–font-head);
-font-size: 0.7rem;
-font-weight: 700;
-letter-spacing: 3px;
-text-transform: uppercase;
-padding: 4px 12px;
-border-radius: 2px;
-white-space: nowrap;
-}
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(7,8,10,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
 
-.phase-title {
-font-family: var(–font-head);
-font-size: 1.5rem;
-font-weight: 700;
-letter-spacing: -0.5px;
-}
+  nav::-webkit-scrollbar { display: none; }
 
-.phase-duration {
-margin-left: auto;
-font-size: 11px;
-color: var(–muted);
-letter-spacing: 1px;
-white-space: nowrap;
-}
+  .nav-item {
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text3);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
 
-/* COLOR VARIANTS */
-.p1 .phase-num { background: rgba(0,229,255,0.12); color: var(–accent1); }
-.p1 .phase-title { color: var(–accent1); }
-.p2 .phase-num { background: rgba(167,139,250,0.12); color: var(–accent3); }
-.p2 .phase-title { color: var(–accent3); }
-.p3 .phase-num { background: rgba(52,211,153,0.12); color: var(–accent4); }
-.p3 .phase-title { color: var(–accent4); }
-.p4 .phase-num { background: rgba(251,191,36,0.12); color: var(–accent5); }
-.p4 .phase-title { color: var(–accent5); }
-.p5 .phase-num { background: rgba(255,107,107,0.12); color: var(–accent2); }
-.p5 .phase-title { color: var(–accent2); }
-.p6 .phase-num { background: rgba(0,229,255,0.12); color: var(–accent1); }
-.p6 .phase-title { color: var(–accent1); }
-.p7 .phase-num { background: rgba(167,139,250,0.12); color: var(–accent3); }
-.p7 .phase-title { color: var(–accent3); }
-.p8 .phase-num { background: rgba(52,211,153,0.12); color: var(–accent4); }
-.p8 .phase-title { color: var(–accent4); }
+  .nav-item:hover { color: var(--text2); }
+  .nav-item.active { color: var(--text); border-bottom-color: var(--accent); }
 
-/* TOPIC GRID */
-.topic-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-gap: 16px;
-}
+  /* ─── CONTROLS BAR ─── */
+  .controls {
+    padding: 24px 60px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
 
-.topic-card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 6px;
-padding: 20px;
-transition: border-color 0.2s, transform 0.2s;
-position: relative;
-overflow: hidden;
-}
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 240px;
+    max-width: 400px;
+  }
 
-.topic-card::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0; right: 0;
-height: 2px;
-}
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 14px;
+    pointer-events: none;
+  }
 
-.p1 .topic-card::before { background: var(–accent1); }
-.p2 .topic-card::before { background: var(–accent3); }
-.p3 .topic-card::before { background: var(–accent4); }
-.p4 .topic-card::before { background: var(–accent5); }
-.p5 .topic-card::before { background: var(–accent2); }
-.p6 .topic-card::before { background: var(–accent1); }
-.p7 .topic-card::before { background: var(–accent3); }
-.p8 .topic-card::before { background: var(–accent4); }
+  input[type="text"] {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px 10px 38px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
 
-.topic-card:hover {
-border-color: rgba(255,255,255,0.15);
-transform: translateY(-2px);
-}
+  input[type="text"]:focus { border-color: var(--accent); }
+  input[type="text"]::placeholder { color: var(--text3); }
 
-.topic-name {
-font-family: var(–font-head);
-font-size: 0.9rem;
-font-weight: 700;
-margin-bottom: 8px;
-color: var(–text);
-}
+  .filter-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
 
-.topic-desc {
-color: var(–muted);
-font-size: 11.5px;
-line-height: 1.7;
-margin-bottom: 14px;
-}
+  .filter-btn {
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
 
-.subtopics {
-display: flex;
-flex-wrap: wrap;
-gap: 6px;
-margin-bottom: 14px;
-}
+  .filter-btn:hover { border-color: var(--border2); color: var(--text); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-.subtopic {
-font-size: 10px;
-padding: 3px 8px;
-border-radius: 2px;
-background: var(–surface2);
-color: var(–muted);
-border: 1px solid var(–border);
-letter-spacing: 0.5px;
-}
+  .results-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    margin-left: auto;
+  }
 
-.resources {
-border-top: 1px solid var(–border);
-padding-top: 12px;
-display: flex;
-flex-direction: column;
-gap: 5px;
-}
+  /* ─── ROADMAP SECTION ─── */
+  .roadmap-section {
+    padding: 60px;
+    border-bottom: 1px solid var(--border);
+  }
 
-.resource {
-display: flex;
-align-items: flex-start;
-gap: 8px;
-font-size: 11px;
-color: var(–muted);
-}
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
-.resource a {
-color: inherit;
-text-decoration: none;
-transition: color 0.15s;
-word-break: break-word;
-}
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
 
-.resource a:hover { color: var(–text); }
+  .roadmap-phases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+  }
 
-.res-type {
-font-size: 9px;
-padding: 2px 6px;
-border-radius: 2px;
-white-space: nowrap;
-flex-shrink: 0;
-letter-spacing: 0.5px;
-font-weight: 700;
-}
+  .phase-card {
+    background: var(--surface);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
 
-.res-yt { background: rgba(255,107,107,0.15); color: #ff6b6b; }
-.res-book { background: rgba(251,191,36,0.15); color: #fbbf24; }
-.res-course { background: rgba(167,139,250,0.15); color: #a78bfa; }
-.res-paper { background: rgba(52,211,153,0.15); color: #34d399; }
-.res-blog { background: rgba(0,229,255,0.15); color: #00e5ff; }
-.res-github { background: rgba(255,255,255,0.08); color: #ccc; }
+  .phase-card:hover { background: var(--surface2); }
 
-/* TIMELINE */
-.timeline-bar {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 6px;
-padding: 32px;
-margin-bottom: 56px;
-}
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+  }
 
-.tl-title {
-font-family: var(–font-head);
-font-size: 1rem;
-font-weight: 700;
-margin-bottom: 24px;
-color: var(–accent1);
-letter-spacing: -0.3px;
-}
+  .phase-card:nth-child(1)::before { background: var(--cat-math); }
+  .phase-card:nth-child(2)::before { background: var(--cat-fundamentals); }
+  .phase-card:nth-child(3)::before { background: var(--cat-classical); }
+  .phase-card:nth-child(4)::before { background: var(--cat-embeddings); }
+  .phase-card:nth-child(5)::before { background: var(--cat-neural); }
+  .phase-card:nth-child(6)::before { background: var(--cat-transformers); }
+  .phase-card:nth-child(7)::before { background: var(--cat-llm); }
+  .phase-card:nth-child(8)::before { background: var(--cat-finetuning); }
+  .phase-card:nth-child(9)::before { background: var(--cat-rl); }
+  .phase-card:nth-child(10)::before { background: var(--cat-reasoning); }
 
-.tl-phases {
-display: flex;
-gap: 4px;
-height: 32px;
-border-radius: 4px;
-overflow: hidden;
-margin-bottom: 12px;
-}
+  .phase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
 
-.tl-seg {
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 0.5px;
-transition: flex 0.3s;
-}
+  .phase-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
 
-.tl-labels {
-display: flex;
-gap: 16px;
-flex-wrap: wrap;
-margin-top: 16px;
-}
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
 
-.tl-label {
-display: flex;
-align-items: center;
-gap: 6px;
-font-size: 11px;
-color: var(–muted);
-}
+  .phase-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
 
-.tl-dot {
-width: 8px;
-height: 8px;
-border-radius: 1px;
-flex-shrink: 0;
-}
+  .phase-topic-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--bg3);
+    color: var(--text3);
+    border: 1px solid var(--border);
+  }
 
-/* DIVIDER */
-.section-divider {
-border: none;
-border-top: 1px solid var(–border);
-margin: 48px 0;
-}
+  /* ─── MAIN CONTENT ─── */
+  .main-content {
+    padding: 60px;
+  }
 
-/* FOOTER */
-footer {
-text-align: center;
-padding: 40px 0 20px;
-color: var(–muted);
-font-size: 11px;
-letter-spacing: 1px;
-}
+  /* ─── CATEGORY BLOCK ─── */
+  .category-block {
+    margin-bottom: 64px;
+    transition: opacity 0.2s;
+  }
 
-footer span { color: var(–accent1); }
+  .category-block.hidden { display: none; }
 
-@media (max-width: 600px) {
-.topic-grid { grid-template-columns: 1fr; }
-.phase-header { flex-wrap: wrap; }
-.phase-duration { margin-left: 0; }
-.stats-bar { gap: 24px; }
-h1 { font-size: 2rem; }
-}
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .cat-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .cat-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    margin-left: auto;
+  }
+
+  /* ─── SUBCATEGORY ─── */
+  .subcategory {
+    margin-bottom: 32px;
+  }
+
+  .subcat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 14px;
+    padding-left: 2px;
+  }
+
+  /* ─── TOPIC ROW ─── */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2px;
+  }
+
+  .topic-card {
+    background: var(--surface);
+    padding: 0;
+    border-radius: 0;
+    overflow: hidden;
+    transition: background 0.15s;
+  }
+
+  .topic-card:hover { background: var(--surface2); }
+
+  .topic-card.hidden { display: none; }
+
+  .topic-header {
+    padding: 16px 18px 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .topic-name {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .expand-icon {
+    color: var(--text3);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: transform 0.2s;
+  }
+
+  .topic-card.expanded .expand-icon { transform: rotate(90deg); }
+
+  .topic-resources {
+    display: none;
+    padding: 0 18px 16px;
+    border-top: 1px solid var(--border);
+    margin-top: 2px;
+  }
+
+  .topic-card.expanded .topic-resources { display: block; }
+
+  .resource-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .resource-item:last-child { border-bottom: none; }
+
+  .resource-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .resource-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .type-paper { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .type-book { background: rgba(16,185,129,0.15); color: #34d399; }
+  .type-article { background: rgba(245,158,11,0.15); color: #fbbf24; }
+  .type-course { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .type-youtube { background: rgba(239,68,68,0.15); color: #f87171; }
+  .type-blog { background: rgba(20,184,166,0.15); color: #2dd4bf; }
+  .type-doc { background: rgba(156,163,175,0.15); color: #9ca3af; }
+  .type-dataset { background: rgba(249,115,22,0.15); color: #fb923c; }
+  .type-leaderboard { background: rgba(236,72,153,0.15); color: #f472b6; }
+  .type-other { background: rgba(100,116,139,0.15); color: #94a3b8; }
+
+  .resource-title {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .resource-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .resource-author {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  .resource-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  .resource-link:hover { text-decoration: underline; }
+
+  .resource-note {
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.5;
+    font-style: italic;
+    padding-top: 2px;
+  }
+
+  /* ─── PROGRESS ─── */
+  .progress-bar-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 200;
+    background: var(--border);
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ─── BACK TO TOP ─── */
+  .back-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text2);
+    font-size: 16px;
+    transition: all 0.2s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  .back-top.visible { opacity: 1; pointer-events: all; }
+  .back-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    background: var(--bg2);
+  }
+
+  .footer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    header, .roadmap-section, .main-content { padding: 32px 24px; }
+    nav { padding: 0 24px; }
+    .controls { padding: 16px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 12px; }
+    .topics-grid { grid-template-columns: 1fr; }
+    .roadmap-phases { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+    .stats-row { gap: 20px; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .category-block {
+    animation: fadeUp 0.4s ease forwards;
+  }
 </style>
-
 </head>
 <body>
-<div class="container">
 
-  <!-- HEADER -->
+<div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
 
-  <header>
-    <span class="header-tag">// Complete Learning Roadmap</span>
-    <h1><span class="grad1">NLP</span> to <span class="grad2">Reasoning</span><br>Models</h1>
-    <p class="header-sub">A comprehensive, sequenced curriculum from linear algebra fundamentals to RLHF & Constitutional AI — everything you need to build a Claude-equivalent system.</p>
-    <div class="stats-bar">
-      <div class="stat"><span class="stat-num">8</span><span class="stat-label">Phases</span></div>
-      <div class="stat"><span class="stat-num">60+</span><span class="stat-label">Topics</span></div>
-      <div class="stat"><span class="stat-num">~18</span><span class="stat-label">Months</span></div>
-      <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Resources</span></div>
-    </div>
-  </header>
-
-  <!-- TIMELINE -->
-
-  <div class="timeline-bar">
-    <div class="tl-title">// Estimated Timeline Overview</div>
-    <div class="tl-phases">
-      <div class="tl-seg" style="flex:1;background:rgba(0,229,255,0.25);color:#00e5ff;">P1</div>
-      <div class="tl-seg" style="flex:1;background:rgba(167,139,250,0.25);color:#a78bfa;">P2</div>
-      <div class="tl-seg" style="flex:2;background:rgba(52,211,153,0.25);color:#34d399;">P3</div>
-      <div class="tl-seg" style="flex:2;background:rgba(251,191,36,0.25);color:#fbbf24;">P4</div>
-      <div class="tl-seg" style="flex:3;background:rgba(255,107,107,0.25);color:#ff6b6b;">P5</div>
-      <div class="tl-seg" style="flex:3;background:rgba(0,229,255,0.2);color:#00e5ff;">P6</div>
-      <div class="tl-seg" style="flex:3;background:rgba(167,139,250,0.2);color:#a78bfa;">P7</div>
-      <div class="tl-seg" style="flex:3;background:rgba(52,211,153,0.2);color:#34d399;">P8</div>
-    </div>
-    <div class="tl-labels">
-      <div class="tl-label"><div class="tl-dot" style="background:#00e5ff;"></div>P1: Math Foundations (3w)</div>
-      <div class="tl-label"><div class="tl-dot" style="background:#a78bfa;"></div>P2: Classic NLP (3w)</div>
-      <div class="tl-label"><div class="tl-dot" style="background:#34d399;"></div>P3: Deep Learning for NLP (6w)</div>
-      <div class="tl-label"><div class="tl-dot" style="background:#fbbf24;"></div>P4: Transformers (6w)</div>
-      <div class="tl-label"><div class="tl-dot" style="background:#ff6b6b;"></div>P5: Pre-training LLMs (8w)</div>
-      <div class="tl-label"><div class="tl-dot" style="background:#00e5ff;"></div>P6: Fine-tuning & Alignment (8w)</div>
-      <div class="tl-label"><div class="tl-dot" style="background:#a78bfa;"></div>P7: RLHF & Constitutional AI (8w)</div>
-      <div class="tl-label"><div class="tl-dot" style="background:#34d399;"></div>P8: Reasoning & Frontier (6w)</div>
-    </div>
+<!-- HEADER -->
+<header>
+  <div class="header-glow"></div>
+  <div class="header-tag">Complete Curriculum 2025</div>
+  <h1>NLP → Reasoning<br>Model Mastery</h1>
+  <p class="header-sub">Everything you need to go from NLP fundamentals to building Claude-level reasoning capabilities — math, papers, books, courses, and code resources in one place.</p>
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num" id="totalTopics">0</span><span class="stat-label">Unique Topics</span></div>
+    <div class="stat"><span class="stat-num" id="totalResources">0</span><span class="stat-label">Resources</span></div>
+    <div class="stat"><span class="stat-num">22</span><span class="stat-label">Categories</span></div>
+    <div class="stat"><span class="stat-num">10</span><span class="stat-label">Phases</span></div>
   </div>
+</header>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-item active" onclick="scrollToSection('roadmap')">Roadmap</div>
+  <div class="nav-item" onclick="scrollToSection('math')">Math</div>
+  <div class="nav-item" onclick="scrollToSection('fundamentals')">Fundamentals</div>
+  <div class="nav-item" onclick="scrollToSection('classical')">Classical NLP</div>
+  <div class="nav-item" onclick="scrollToSection('embeddings')">Embeddings</div>
+  <div class="nav-item" onclick="scrollToSection('neural')">Neural</div>
+  <div class="nav-item" onclick="scrollToSection('transformers')">Transformers</div>
+  <div class="nav-item" onclick="scrollToSection('llm')">LLMs</div>
+  <div class="nav-item" onclick="scrollToSection('finetuning')">Fine-tuning</div>
+  <div class="nav-item" onclick="scrollToSection('rl')">RL & Alignment</div>
+  <div class="nav-item" onclick="scrollToSection('reasoning')">Reasoning</div>
+  <div class="nav-item" onclick="scrollToSection('generation')">Generation</div>
+  <div class="nav-item" onclick="scrollToSection('applications')">Applications</div>
+  <div class="nav-item" onclick="scrollToSection('agents')">Agents</div>
+  <div class="nav-item" onclick="scrollToSection('eval')">Evaluation</div>
+  <div class="nav-item" onclick="scrollToSection('interpretability')">Interpretability</div>
+  <div class="nav-item" onclick="scrollToSection('advanced')">Advanced</div>
+  <div class="nav-item" onclick="scrollToSection('courses')">Courses</div>
+  <div class="nav-item" onclick="scrollToSection('tools')">Tools</div>
+</nav>
 
-  <!-- PHASE 1 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p1">
-    <div class="phase-header">
-      <span class="phase-num">Phase 01</span>
-      <span class="phase-title">Mathematical Foundations</span>
-      <span class="phase-duration">~3 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Linear Algebra for NLP</div>
-    <div class="topic-desc">The language of vectors, matrices, and tensor operations that underpins every embedding and weight matrix.</div>
-    <div class="subtopics">
-      <span class="subtopic">Vectors & Dot Products</span>
-      <span class="subtopic">Matrix Multiplication</span>
-      <span class="subtopic">Eigenvalues/Eigenvectors</span>
-      <span class="subtopic">SVD & PCA</span>
-      <span class="subtopic">Tensor Operations</span>
-      <span class="subtopic">Norms & Distance Metrics</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3Blue1Brown — Essence of Linear Algebra</a></div>
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://mml-book.github.io/">Mathematics for Machine Learning (Deisenroth) — Free PDF</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/specializations/mathematics-machine-learning">Coursera: Mathematics for ML Specialization</a></div>
-    </div>
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="searchInput" placeholder="Search topics, papers, authors..." oninput="filterContent()">
   </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Probability & Statistics</div>
-    <div class="topic-desc">Probability theory is the backbone of language modeling — from MLE to Bayesian inference.</div>
-    <div class="subtopics">
-      <span class="subtopic">Probability Distributions</span>
-      <span class="subtopic">Bayes' Theorem</span>
-      <span class="subtopic">MLE & MAP</span>
-      <span class="subtopic">KL Divergence</span>
-      <span class="subtopic">Information Theory</span>
-      <span class="subtopic">Cross-Entropy</span>
-      <span class="subtopic">Perplexity</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@statquest">StatQuest with Josh Starmer (YouTube)</a></div>
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="http://www.deeplearningbook.org/">Deep Learning Book — Ch. 3 (Goodfellow)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://betterexplained.com/articles/information-entropy/">BetterExplained: Information Entropy</a></div>
-    </div>
+  <div class="filter-group" id="typeFilters">
+    <button class="filter-btn active" onclick="setTypeFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setTypeFilter('paper', this)">Papers</button>
+    <button class="filter-btn" onclick="setTypeFilter('book', this)">Books</button>
+    <button class="filter-btn" onclick="setTypeFilter('course', this)">Courses</button>
+    <button class="filter-btn" onclick="setTypeFilter('article', this)">Articles</button>
+    <button class="filter-btn" onclick="setTypeFilter('youtube', this)">YouTube</button>
+    <button class="filter-btn" onclick="setTypeFilter('doc', this)">Docs</button>
   </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Calculus & Optimization</div>
-    <div class="topic-desc">Gradients, chain rule, and optimization algorithms are how neural networks actually learn.</div>
-    <div class="subtopics">
-      <span class="subtopic">Partial Derivatives</span>
-      <span class="subtopic">Chain Rule</span>
-      <span class="subtopic">Gradient Descent</span>
-      <span class="subtopic">Adam / AdaGrad</span>
-      <span class="subtopic">Learning Rate Schedules</span>
-      <span class="subtopic">Jacobians & Hessians</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">3Blue1Brown — Essence of Calculus</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.udemy.com/course/calculus-and-backpropagation/">Udemy: Calculus & Backprop for DL</a></div>
-    </div>
-  </div>
-
+  <span class="results-count" id="resultsCount"></span>
 </div>
-```
 
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <!-- PHASE 2 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p2">
-    <div class="phase-header">
-      <span class="phase-num">Phase 02</span>
-      <span class="phase-title">Classical NLP</span>
-      <span class="phase-duration">~3 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Text Preprocessing</div>
-    <div class="topic-desc">Foundation pipeline steps before any model sees the text.</div>
-    <div class="subtopics">
-      <span class="subtopic">Tokenization</span>
-      <span class="subtopic">Stemming & Lemmatization</span>
-      <span class="subtopic">Stop Words</span>
-      <span class="subtopic">POS Tagging</span>
-      <span class="subtopic">Named Entity Recognition</span>
-      <span class="subtopic">Dependency Parsing</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://www.nltk.org/book/">NLTK Book — Free Online</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/specializations/natural-language-processing">Coursera: NLP Specialization (DeepLearning.AI)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://spacy.io/usage/linguistic-features">spaCy Docs: Linguistic Features</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Text Representation</div>
-    <div class="topic-desc">How to convert text into numbers — the classic approaches before neural embeddings.</div>
-    <div class="subtopics">
-      <span class="subtopic">Bag of Words (BoW)</span>
-      <span class="subtopic">TF-IDF</span>
-      <span class="subtopic">N-gram Models</span>
-      <span class="subtopic">Co-occurrence Matrices</span>
-      <span class="subtopic">PMI / PPMI</span>
-      <span class="subtopic">Latent Semantic Analysis</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://web.stanford.edu/~jurafsky/slp3/">Speech & Language Processing — Jurafsky & Martin (Free)</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=D2V1okCEsiE">Stanford CS224N Lecture 1 (YouTube)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Language Models (N-gram)</div>
-    <div class="topic-desc">Probabilistic language models — the ancestors of GPT.</div>
-    <div class="subtopics">
-      <span class="subtopic">Unigram / Bigram / Trigram</span>
-      <span class="subtopic">Laplace Smoothing</span>
-      <span class="subtopic">Kneser-Ney Smoothing</span>
-      <span class="subtopic">Perplexity Evaluation</span>
-      <span class="subtopic">Interpolation</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://web.stanford.edu/~jurafsky/slp3/3.pdf">Jurafsky SLP3 — Ch. 3: N-gram Language Models</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=hB2ShMlwTyc">N-gram Language Models Explained (YT)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Classical ML for NLP</div>
-    <div class="topic-desc">Non-neural approaches that still power many production systems.</div>
-    <div class="subtopics">
-      <span class="subtopic">Naive Bayes Classifier</span>
-      <span class="subtopic">Logistic Regression</span>
-      <span class="subtopic">SVM for Text</span>
-      <span class="subtopic">CRF (Conditional Random Fields)</span>
-      <span class="subtopic">HMM for Sequence Labeling</span>
-      <span class="subtopic">Sentiment Analysis</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/specializations/natural-language-processing">DeepLearning.AI NLP Specialization (C1)</a></div>
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="https://www.oreilly.com/library/view/natural-language-processing/9781491978221/">NLP with Python & spaCy — O'Reilly</a></div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <!-- PHASE 3 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p3">
-    <div class="phase-header">
-      <span class="phase-num">Phase 03</span>
-      <span class="phase-title">Deep Learning for NLP</span>
-      <span class="phase-duration">~6 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Word Embeddings</div>
-    <div class="topic-desc">The breakthrough that mapped words into dense semantic vector spaces.</div>
-    <div class="subtopics">
-      <span class="subtopic">Word2Vec (Skip-gram / CBOW)</span>
-      <span class="subtopic">GloVe</span>
-      <span class="subtopic">FastText</span>
-      <span class="subtopic">Negative Sampling</span>
-      <span class="subtopic">Embedding Evaluation</span>
-      <span class="subtopic">Analogy Tasks</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1301.3781">Mikolov et al. — Word2Vec (2013)</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=ERibwqs9p38">CS224N Lecture 2: Word Vectors</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/illustrated-word2vec/">Jay Alammar: Illustrated Word2Vec</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">RNNs & Sequence Models</div>
-    <div class="topic-desc">Sequential processing and the vanishing gradient problem that motivated transformers.</div>
-    <div class="subtopics">
-      <span class="subtopic">Vanilla RNN</span>
-      <span class="subtopic">LSTM</span>
-      <span class="subtopic">GRU</span>
-      <span class="subtopic">Bidirectional RNNs</span>
-      <span class="subtopic">Sequence-to-Sequence</span>
-      <span class="subtopic">Teacher Forcing</span>
-      <span class="subtopic">Vanishing Gradients</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Colah's Blog: Understanding LSTMs</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=6niqTuYFZLQ">Andrew Ng: Sequence Models (Coursera YT)</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://www.coursera.org/learn/nlp-sequence-models">Coursera: Sequence Models (DeepLearning.AI)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Attention Mechanism</div>
-    <div class="topic-desc">The critical innovation that enabled models to selectively focus — precursor to the full transformer.</div>
-    <div class="subtopics">
-      <span class="subtopic">Bahdanau Attention</span>
-      <span class="subtopic">Luong Attention</span>
-      <span class="subtopic">Scaled Dot-Product Attention</span>
-      <span class="subtopic">Attention Scores & Softmax</span>
-      <span class="subtopic">Attention Visualization</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1409.0473">Bahdanau et al. — Neural Machine Translation (2014)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay Alammar: Visualizing Attention</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">CNN for Text</div>
-    <div class="topic-desc">Convolutional filters applied to text for efficient pattern detection and classification.</div>
-    <div class="subtopics">
-      <span class="subtopic">1D Convolution on Text</span>
-      <span class="subtopic">Max Pooling</span>
-      <span class="subtopic">TextCNN Architecture</span>
-      <span class="subtopic">N-gram Feature Extraction</span>
-      <span class="subtopic">Text Classification</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1408.5882">Kim (2014): CNN for Sentence Classification</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://towardsdatascience.com/understanding-how-convolutional-neural-network-cnn-perform-text-classification-with-word-d2ee64b9dd0b">TowardDS: CNN for Text</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Regularization & Training Tricks</div>
-    <div class="topic-desc">Making deep NLP models train reliably and generalize well.</div>
-    <div class="subtopics">
-      <span class="subtopic">Dropout</span>
-      <span class="subtopic">Batch Normalization</span>
-      <span class="subtopic">Layer Normalization</span>
-      <span class="subtopic">Gradient Clipping</span>
-      <span class="subtopic">Weight Initialization</span>
-      <span class="subtopic">Mixed Precision (FP16)</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="http://www.deeplearningbook.org/">Deep Learning Book — Goodfellow et al. Ch. 7</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=NyG-YD1WsMo">Andrej Karpathy: Training NNs (YT)</a></div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <!-- PHASE 4 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p4">
-    <div class="phase-header">
-      <span class="phase-num">Phase 04</span>
-      <span class="phase-title">The Transformer Architecture</span>
-      <span class="phase-duration">~6 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Original Transformer</div>
-    <div class="topic-desc">"Attention Is All You Need" — the architecture that changed everything in NLP.</div>
-    <div class="subtopics">
-      <span class="subtopic">Encoder-Decoder Structure</span>
-      <span class="subtopic">Multi-Head Self-Attention</span>
-      <span class="subtopic">Positional Encoding</span>
-      <span class="subtopic">Feed-Forward Sublayers</span>
-      <span class="subtopic">Residual Connections</span>
-      <span class="subtopic">Layer Norm</span>
-      <span class="subtopic">Masking</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1706.03762">Vaswani et al. (2017): Attention Is All You Need</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/illustrated-transformer/">Jay Alammar: The Illustrated Transformer</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=4Bdc55j80l8">Yannic Kilcher: Attention Is All You Need</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/karpathy/minGPT">Karpathy: minGPT — Annotated Transformer</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Positional Encodings (Deep Dive)</div>
-    <div class="topic-desc">How transformers represent sequence order without recurrence.</div>
-    <div class="subtopics">
-      <span class="subtopic">Sinusoidal Encodings</span>
-      <span class="subtopic">Learned Positional Embeddings</span>
-      <span class="subtopic">Relative Position Encodings</span>
-      <span class="subtopic">Rotary Embeddings (RoPE)</span>
-      <span class="subtopic">ALiBi</span>
-      <span class="subtopic">Length Generalization</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/">Positional Encoding Deep Dive</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2104.09864">Su et al.: RoFormer — RoPE (2021)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">BERT & Encoder Models</div>
-    <div class="topic-desc">Bidirectional pre-training — how context from both directions revolutionized NLU.</div>
-    <div class="subtopics">
-      <span class="subtopic">Masked Language Modeling</span>
-      <span class="subtopic">Next Sentence Prediction</span>
-      <span class="subtopic">BERT Fine-tuning</span>
-      <span class="subtopic">RoBERTa</span>
-      <span class="subtopic">DistilBERT</span>
-      <span class="subtopic">ALBERT</span>
-      <span class="subtopic">DeBERTa</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1810.04805">Devlin et al.: BERT (2018)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/illustrated-bert/">Jay Alammar: Illustrated BERT</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://huggingface.co/course/chapter1/1">HuggingFace NLP Course (Free)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">GPT & Decoder Models</div>
-    <div class="topic-desc">Autoregressive language modeling — the foundation of ChatGPT, Claude, and Gemini.</div>
-    <div class="subtopics">
-      <span class="subtopic">Causal (Autoregressive) LM</span>
-      <span class="subtopic">GPT-1/2/3 Architecture Evolution</span>
-      <span class="subtopic">Causal Masking</span>
-      <span class="subtopic">In-Context Learning</span>
-      <span class="subtopic">Few-Shot Prompting</span>
-      <span class="subtopic">Zero-Shot Generalization</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://openai.com/research/language-unsupervised">Radford et al.: GPT-1 (2018)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2005.14165">Brown et al.: GPT-3 (2020)</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=kCc8FmEb1nY">Karpathy: Let's Build GPT (3h video)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">T5 & Encoder-Decoder Models</div>
-    <div class="topic-desc">Text-to-Text Transfer Transformer — unifying all NLP tasks as text generation.</div>
-    <div class="subtopics">
-      <span class="subtopic">T5 Architecture</span>
-      <span class="subtopic">Span Corruption Objective</span>
-      <span class="subtopic">BART</span>
-      <span class="subtopic">mT5 (Multilingual)</span>
-      <span class="subtopic">Seq2Seq Fine-tuning</span>
-      <span class="subtopic">Summarization / Translation</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1910.10683">Raffel et al.: T5 (2019)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/model_doc/t5">HuggingFace T5 Docs</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Tokenization (Advanced)</div>
-    <div class="topic-desc">Subword tokenization strategies used in every modern LLM.</div>
-    <div class="subtopics">
-      <span class="subtopic">BPE (Byte-Pair Encoding)</span>
-      <span class="subtopic">WordPiece</span>
-      <span class="subtopic">SentencePiece / Unigram LM</span>
-      <span class="subtopic">Byte-level BPE (GPT-2)</span>
-      <span class="subtopic">Tiktoken</span>
-      <span class="subtopic">Vocabulary Design</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/tokenizer_summary">HuggingFace: Tokenizer Summary</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=zduSFxRajkE">Karpathy: Let's Build the GPT Tokenizer</a></div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <!-- PHASE 5 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p5">
-    <div class="phase-header">
-      <span class="phase-num">Phase 05</span>
-      <span class="phase-title">Pre-training Large Language Models</span>
-      <span class="phase-duration">~8 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Scaling Laws</div>
-    <div class="topic-desc">How model size, data, and compute interact — the empirical laws guiding LLM development.</div>
-    <div class="subtopics">
-      <span class="subtopic">Kaplan Scaling Laws</span>
-      <span class="subtopic">Chinchilla Scaling</span>
-      <span class="subtopic">Compute-Optimal Training</span>
-      <span class="subtopic">Loss vs. Parameters</span>
-      <span class="subtopic">Emergent Abilities</span>
-      <span class="subtopic">Data Scaling</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2001.08361">Kaplan et al.: Scaling Laws for NLMs (2020)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2203.15556">Hoffmann et al.: Chinchilla (2022)</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=UFem7xa3Q2Q">Scaling Laws Explained (YT)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Data Collection & Curation</div>
-    <div class="topic-desc">The data pipeline that feeds LLM pre-training — quality matters more than quantity.</div>
-    <div class="subtopics">
-      <span class="subtopic">Common Crawl Processing</span>
-      <span class="subtopic">Deduplication (MinHash)</span>
-      <span class="subtopic">Quality Filtering</span>
-      <span class="subtopic">Data Mixing Ratios</span>
-      <span class="subtopic">The Pile / RedPajama</span>
-      <span class="subtopic">Toxic Content Filtering</span>
-      <span class="subtopic">Domain-Specific Data</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2101.00027">Gao et al.: The Pile (2021)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/curated-data">HuggingFace: Curating Data for LLMs</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Distributed Training</div>
-    <div class="topic-desc">Training LLMs requires spreading work across hundreds of GPUs.</div>
-    <div class="subtopics">
-      <span class="subtopic">Data Parallelism</span>
-      <span class="subtopic">Model Parallelism</span>
-      <span class="subtopic">Pipeline Parallelism</span>
-      <span class="subtopic">Tensor Parallelism</span>
-      <span class="subtopic">ZeRO / DeepSpeed</span>
-      <span class="subtopic">FSDP (PyTorch)</span>
-      <span class="subtopic">Gradient Accumulation</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/perf_train_gpu_many">HuggingFace: Training on Many GPUs</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1910.02054">Rajbhandari et al.: ZeRO (2019)</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/microsoft/DeepSpeed">Microsoft DeepSpeed GitHub</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Efficient Architectures</div>
-    <div class="topic-desc">Architectural innovations to make transformers faster and handle longer contexts.</div>
-    <div class="subtopics">
-      <span class="subtopic">Sparse Attention</span>
-      <span class="subtopic">Longformer / BigBird</span>
-      <span class="subtopic">Flash Attention (v1/v2/v3)</span>
-      <span class="subtopic">Grouped Query Attention (GQA)</span>
-      <span class="subtopic">Multi-Query Attention (MQA)</span>
-      <span class="subtopic">Mixture of Experts (MoE)</span>
-      <span class="subtopic">KV Cache</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2205.14135">Dao et al.: FlashAttention (2022)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/">Lilian Weng: Transformer Family v2</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">LLaMA / Open LLMs</div>
-    <div class="topic-desc">Study the open-source model architectures that power most research today.</div>
-    <div class="subtopics">
-      <span class="subtopic">LLaMA Architecture</span>
-      <span class="subtopic">RMSNorm</span>
-      <span class="subtopic">SwiGLU Activation</span>
-      <span class="subtopic">Mistral / Mixtral</span>
-      <span class="subtopic">Falcon, MPT, Qwen</span>
-      <span class="subtopic">Gemma Architecture</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2302.13971">Touvron et al.: LLaMA (2023)</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/meta-llama/llama">Meta LLaMA GitHub</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=oM4VmoabDAI">Umar Jamil: LLaMA from Scratch</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Inference & Generation</div>
-    <div class="topic-desc">How trained LLMs produce text — sampling strategies and decoding algorithms.</div>
-    <div class="subtopics">
-      <span class="subtopic">Greedy Decoding</span>
-      <span class="subtopic">Beam Search</span>
-      <span class="subtopic">Top-k Sampling</span>
-      <span class="subtopic">Top-p (Nucleus) Sampling</span>
-      <span class="subtopic">Temperature</span>
-      <span class="subtopic">Speculative Decoding</span>
-      <span class="subtopic">Repetition Penalties</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/how-to-generate">HuggingFace: How to Generate Text</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://towardsdatascience.com/the-ultimate-guide-to-text-generation-with-language-models-5d2ef8fc8e30">Decoding Strategies Guide</a></div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <!-- PHASE 6 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p6">
-    <div class="phase-header">
-      <span class="phase-num">Phase 06</span>
-      <span class="phase-title">Fine-tuning, Instruction Tuning & Alignment</span>
-      <span class="phase-duration">~8 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Supervised Fine-Tuning (SFT)</div>
-    <div class="topic-desc">Adapting pre-trained models to follow instructions using labeled demonstration data.</div>
-    <div class="subtopics">
-      <span class="subtopic">Task-Specific Fine-tuning</span>
-      <span class="subtopic">Instruction Tuning</span>
-      <span class="subtopic">Chat Templates</span>
-      <span class="subtopic">Data Formats (Alpaca, ShareGPT)</span>
-      <span class="subtopic">Overfitting & Catastrophic Forgetting</span>
-      <span class="subtopic">Multi-task Fine-tuning</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2109.01652">Wei et al.: Finetuned LMs Are Zero-Shot Learners</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/instruction-tuning-sd">HuggingFace: Instruction Tuning</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/tatsu-lab/stanford_alpaca">Stanford Alpaca GitHub</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Parameter-Efficient Fine-tuning (PEFT)</div>
-    <div class="topic-desc">Fine-tune only a tiny fraction of parameters while matching full fine-tune quality.</div>
-    <div class="subtopics">
-      <span class="subtopic">LoRA (Low-Rank Adaptation)</span>
-      <span class="subtopic">QLoRA (4-bit LoRA)</span>
-      <span class="subtopic">Prefix Tuning</span>
-      <span class="subtopic">Prompt Tuning</span>
-      <span class="subtopic">Adapter Layers</span>
-      <span class="subtopic">IA³</span>
-      <span class="subtopic">DoRA</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2106.09685">Hu et al.: LoRA (2021)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2305.14314">Dettmers et al.: QLoRA (2023)</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/huggingface/peft">HuggingFace PEFT Library</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=Us5ZFp16PaU">LoRA Fine-tuning Explained (YT)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Quantization & Model Compression</div>
-    <div class="topic-desc">Reducing model size and inference cost without major quality loss.</div>
-    <div class="subtopics">
-      <span class="subtopic">INT8 / INT4 Quantization</span>
-      <span class="subtopic">GPTQ</span>
-      <span class="subtopic">AWQ</span>
-      <span class="subtopic">bitsandbytes</span>
-      <span class="subtopic">GGUF / llama.cpp</span>
-      <span class="subtopic">Knowledge Distillation</span>
-      <span class="subtopic">Pruning</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/docs/transformers/quantization">HuggingFace: Quantization Guide</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/ggerganov/llama.cpp">llama.cpp GitHub</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Prompt Engineering</div>
-    <div class="topic-desc">Systematic techniques for eliciting the best behavior from LLMs without weight updates.</div>
-    <div class="subtopics">
-      <span class="subtopic">Zero-shot / Few-shot</span>
-      <span class="subtopic">Chain-of-Thought (CoT)</span>
-      <span class="subtopic">Self-Consistency</span>
-      <span class="subtopic">Tree of Thoughts (ToT)</span>
-      <span class="subtopic">ReAct</span>
-      <span class="subtopic">Structured Output Prompting</span>
-      <span class="subtopic">System Prompts</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2201.11903">Wei et al.: Chain-of-Thought Prompting</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.promptingguide.ai/">DAIR.AI: Prompt Engineering Guide</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://learnprompting.org/">LearnPrompting.org (Free)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Retrieval Augmented Generation (RAG)</div>
-    <div class="topic-desc">Augmenting LLM knowledge with retrieved documents at inference time.</div>
-    <div class="subtopics">
-      <span class="subtopic">Dense Retrieval</span>
-      <span class="subtopic">Bi-encoder / Cross-encoder</span>
-      <span class="subtopic">Vector Databases (FAISS, Chroma, Pinecone)</span>
-      <span class="subtopic">Chunking Strategies</span>
-      <span class="subtopic">Hybrid Retrieval (BM25 + Dense)</span>
-      <span class="subtopic">Re-ranking</span>
-      <span class="subtopic">Advanced RAG</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2005.11401">Lewis et al.: RAG (2020)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.llamaindex.ai/blog/the-a-complete-guide-to-understanding-rag-retrieval-augmented-generation">LlamaIndex: Complete RAG Guide</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=T-D1OfcDW1M">RAG from Scratch (LangChain YT)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">LLM Evaluation</div>
-    <div class="topic-desc">How to rigorously measure what LLMs can and can't do.</div>
-    <div class="subtopics">
-      <span class="subtopic">MMLU / HellaSwag / ARC</span>
-      <span class="subtopic">BLEU / ROUGE / METEOR</span>
-      <span class="subtopic">BERTScore</span>
-      <span class="subtopic">LLM-as-Judge</span>
-      <span class="subtopic">Chatbot Arena (ELO)</span>
-      <span class="subtopic">Safety Evals</span>
-      <span class="subtopic">Benchmark Contamination</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/evaluating-llms">HuggingFace: Evaluating LLMs</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/EleutherAI/lm-evaluation-harness">EleutherAI: LM Eval Harness</a></div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <!-- PHASE 7 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p7">
-    <div class="phase-header">
-      <span class="phase-num">Phase 07</span>
-      <span class="phase-title">RLHF, RLAIF & Constitutional AI</span>
-      <span class="phase-duration">~8 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Reinforcement Learning Foundations</div>
-    <div class="topic-desc">The RL toolkit you need before applying it to language model alignment.</div>
-    <div class="subtopics">
-      <span class="subtopic">Markov Decision Processes</span>
-      <span class="subtopic">Policy & Value Functions</span>
-      <span class="subtopic">Policy Gradient (REINFORCE)</span>
-      <span class="subtopic">PPO (Proximal Policy Optimization)</span>
-      <span class="subtopic">Advantage Functions</span>
-      <span class="subtopic">KL Divergence Penalty</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-book">BOOK</span><a href="http://incompleteideas.net/book/the-book-2nd.html">Sutton & Barto: RL (Free PDF)</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://huggingface.co/learn/deep-rl-course/unit0/introduction">HuggingFace Deep RL Course (Free)</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=2pWv7GOvuf0">Spinning Up in RL: Policy Gradients (YT)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Reward Modeling</div>
-    <div class="topic-desc">Training a separate model to score LLM outputs according to human preferences.</div>
-    <div class="subtopics">
-      <span class="subtopic">Preference Data Collection</span>
-      <span class="subtopic">Bradley-Terry Model</span>
-      <span class="subtopic">Reward Model Architecture</span>
-      <span class="subtopic">Ranking vs. Scoring</span>
-      <span class="subtopic">Reward Hacking</span>
-      <span class="subtopic">Reward Model Ensembling</span>
-      <span class="subtopic">Process vs. Outcome Reward</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2203.02155">Ouyang et al.: InstructGPT / RLHF (2022)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://huggingface.co/blog/rlhf">HuggingFace: Illustrating RLHF</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=2MBJOuVq380">RLHF Explained: Nathan Lambert (YT)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">RLHF Pipeline (Full)</div>
-    <div class="topic-desc">The complete 3-stage pipeline: SFT → Reward Model → PPO fine-tuning.</div>
-    <div class="subtopics">
-      <span class="subtopic">Stage 1: SFT on demonstrations</span>
-      <span class="subtopic">Stage 2: Reward model training</span>
-      <span class="subtopic">Stage 3: PPO with KL penalty</span>
-      <span class="subtopic">Reference Policy Freezing</span>
-      <span class="subtopic">Reward Normalization</span>
-      <span class="subtopic">Stability Tricks</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/huggingface/trl">HuggingFace TRL Library (RLHF/PPO)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://wandb.ai/carperai/summarize_RLHF/reports/Implementing-RLHF-Learning-to-Summarize-with-trlX--VmlldzozMzAwODI2">W&B: RLHF Implementation Report</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">DPO & Offline Alignment</div>
-    <div class="topic-desc">Direct Preference Optimization — aligning LLMs without a separate reward model or RL loop.</div>
-    <div class="subtopics">
-      <span class="subtopic">DPO Derivation</span>
-      <span class="subtopic">Implicit Reward</span>
-      <span class="subtopic">IPO (Identity PO)</span>
-      <span class="subtopic">KTO</span>
-      <span class="subtopic">ORPO</span>
-      <span class="subtopic">SimPO</span>
-      <span class="subtopic">Online vs. Offline DPO</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2305.18290">Rafailov et al.: DPO (2023)</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=XZLc09hkMwA">DPO Paper Explained (Yannic Kilcher)</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/huggingface/trl">TRL DPOTrainer Example</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Constitutional AI (CAI)</div>
-    <div class="topic-desc">Anthropic's framework for training AI to be helpful, harmless, and honest using AI feedback.</div>
-    <div class="subtopics">
-      <span class="subtopic">Constitutional Principles</span>
-      <span class="subtopic">Critique & Revision</span>
-      <span class="subtopic">RLAIF (AI Feedback)</span>
-      <span class="subtopic">Harmlessness vs. Helpfulness Trade-off</span>
-      <span class="subtopic">Supervised CAI Stage</span>
-      <span class="subtopic">RL from AI Feedback Stage</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2212.08073">Bai et al.: Constitutional AI (2022)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback">Anthropic: CAI Blog Post</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=jhCEZyNjJJQ">Constitutional AI Explained (YT)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">RLAIF & Scalable Oversight</div>
-    <div class="topic-desc">Using AI models as evaluators to scale alignment beyond what human raters can provide.</div>
-    <div class="subtopics">
-      <span class="subtopic">AI as Judge / Evaluator</span>
-      <span class="subtopic">Debate</span>
-      <span class="subtopic">Amplification</span>
-      <span class="subtopic">Recursive Reward Modeling</span>
-      <span class="subtopic">Weak-to-Strong Generalization</span>
-      <span class="subtopic">Scalable Oversight Problems</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2309.00267">Lee et al.: RLAIF (2023)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2312.09390">Burns et al.: Weak-to-Strong Generalization</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://openai.com/research/debate">OpenAI: AI Safety via Debate</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Safety & Red-Teaming</div>
-    <div class="topic-desc">Proactively finding and fixing failure modes before deployment.</div>
-    <div class="subtopics">
-      <span class="subtopic">Red-Teaming Methodology</span>
-      <span class="subtopic">Jailbreaking & Prompt Injection</span>
-      <span class="subtopic">Adversarial Prompts</span>
-      <span class="subtopic">Automated Red-Teaming</span>
-      <span class="subtopic">Toxicity / Bias Evaluation</span>
-      <span class="subtopic">Responsible Scaling Policies</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2209.07858">Ganguli et al.: Red Teaming LLMs (Anthropic)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/">Lilian Weng: Adversarial Attacks on LLMs</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Alignment Theory</div>
-    <div class="topic-desc">The deeper theoretical foundations of what it means for an AI to be aligned.</div>
-    <div class="subtopics">
-      <span class="subtopic">Goodhart's Law</span>
-      <span class="subtopic">Mesa-Optimization</span>
-      <span class="subtopic">Deceptive Alignment</span>
-      <span class="subtopic">Reward Misspecification</span>
-      <span class="subtopic">Corrigibility</span>
-      <span class="subtopic">Value Extrapolation</span>
-      <span class="subtopic">Interpretability as Safety</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://www.alignmentforum.org/">Alignment Forum (aggregator)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/1906.01820">Hubinger et al.: Risks from Learned Optimization</a></div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <!-- PHASE 8 -->
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-
-  <div class="phase p8">
-    <div class="phase-header">
-      <span class="phase-num">Phase 08</span>
-      <span class="phase-title">Reasoning Models & Frontier Systems</span>
-      <span class="phase-duration">~6 weeks</span>
-    </div>
-    <div class="topic-grid">
-
-```
-  <div class="topic-card">
-    <div class="topic-name">Chain-of-Thought & Reasoning</div>
-    <div class="topic-desc">Training models to reason step-by-step before answering — the foundation of o1/Claude 3.5.</div>
-    <div class="subtopics">
-      <span class="subtopic">CoT Prompting vs. CoT Training</span>
-      <span class="subtopic">Scratchpad / Think Tokens</span>
-      <span class="subtopic">Process Reward Models (PRM)</span>
-      <span class="subtopic">Outcome Reward Models (ORM)</span>
-      <span class="subtopic">Math Reasoning (MATH, GSM8K)</span>
-      <span class="subtopic">Code Reasoning</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2203.11171">Kojima et al.: Zero-Shot CoT (2022)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2305.20050">Lightman et al.: Let's Verify Step by Step (PRM)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://openai.com/index/learning-to-reason-with-llms/">OpenAI: Learning to Reason with LLMs (o1)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Test-Time Compute Scaling</div>
-    <div class="topic-desc">The new paradigm: spending more compute at inference time to get better answers.</div>
-    <div class="subtopics">
-      <span class="subtopic">Self-Play RL for Reasoning</span>
-      <span class="subtopic">Monte Carlo Tree Search (MCTS)</span>
-      <span class="subtopic">Best-of-N Sampling</span>
-      <span class="subtopic">Iterative Refinement</span>
-      <span class="subtopic">Inference-Time Scaling Laws</span>
-      <span class="subtopic">DeepSeek-R1</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1 Technical Report (2025)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2408.03314">Snell et al.: Scaling LLM Test-Time Compute</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Tool Use & Agents</div>
-    <div class="topic-desc">LLMs that call APIs, search the web, write code, and interact with environments.</div>
-    <div class="subtopics">
-      <span class="subtopic">Function Calling</span>
-      <span class="subtopic">ReAct Framework</span>
-      <span class="subtopic">Toolformer</span>
-      <span class="subtopic">Multi-Agent Systems</span>
-      <span class="subtopic">Long-Horizon Planning</span>
-      <span class="subtopic">Code Interpreters</span>
-      <span class="subtopic">Memory Systems</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2210.03629">Yao et al.: ReAct (2022)</a></div>
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">Lilian Weng: LLM Powered Autonomous Agents</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/langchain-ai/langchain">LangChain GitHub</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Multimodal LLMs</div>
-    <div class="topic-desc">Extending language models to understand images, audio, and video.</div>
-    <div class="subtopics">
-      <span class="subtopic">Vision Encoders (ViT, CLIP)</span>
-      <span class="subtopic">Cross-Modal Attention</span>
-      <span class="subtopic">LLaVA Architecture</span>
-      <span class="subtopic">Flamingo / PaLI</span>
-      <span class="subtopic">Image Tokenization</span>
-      <span class="subtopic">Instruction Following (Multimodal)</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2304.08485">Liu et al.: LLaVA (2023)</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2204.14198">Alayrac et al.: Flamingo (2022)</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Mechanistic Interpretability</div>
-    <div class="topic-desc">Understanding what's actually happening inside transformer weights — circuits, features, superposition.</div>
-    <div class="subtopics">
-      <span class="subtopic">Attention Head Analysis</span>
-      <span class="subtopic">Circuits Framework</span>
-      <span class="subtopic">Superposition Hypothesis</span>
-      <span class="subtopic">Sparse Autoencoders (SAE)</span>
-      <span class="subtopic">Feature Visualization</span>
-      <span class="subtopic">Activation Patching</span>
-      <span class="subtopic">Probing Classifiers</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-blog">BLOG</span><a href="https://transformer-circuits.pub/">Anthropic: Transformer Circuits Thread</a></div>
-      <div class="resource"><span class="res-type res-paper">PAPER</span><a href="https://arxiv.org/abs/2209.11895">Elhage et al.: Toy Models of Superposition</a></div>
-      <div class="resource"><span class="res-type res-course">COURSE</span><a href="https://arena3-chapter1-transformer-interp.streamlit.app/">ARENA 3.0: Mechanistic Interpretability</a></div>
-    </div>
-  </div>
-
-  <div class="topic-card">
-    <div class="topic-name">Build Your Own Mini-Claude</div>
-    <div class="topic-desc">Putting it all together: pre-train a small LM, apply SFT + RLHF, and deploy it.</div>
-    <div class="subtopics">
-      <span class="subtopic">Pre-train a 100M–1B param model</span>
-      <span class="subtopic">Build an instruction dataset</span>
-      <span class="subtopic">Apply LoRA SFT</span>
-      <span class="subtopic">Train a reward model</span>
-      <span class="subtopic">Run DPO/PPO</span>
-      <span class="subtopic">Evaluate on benchmarks</span>
-      <span class="subtopic">Deploy with vLLM / Ollama</span>
-    </div>
-    <div class="resources">
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/karpathy/nanoGPT">Karpathy: nanoGPT</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/OpenLMLab/MOSS-RLHF">MOSS-RLHF: Open RLHF Pipeline</a></div>
-      <div class="resource"><span class="res-type res-github">CODE</span><a href="https://github.com/vllm-project/vllm">vLLM: Fast LLM Serving</a></div>
-      <div class="resource"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/watch?v=l8pRSuU81PU">Karpathy: Reproduce GPT-2 (124M)</a></div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <hr class="section-divider">
-
-  <!-- KEY BOOKS SECTION -->
-
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:32px;margin-bottom:48px;">
-    <div style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--accent5);margin-bottom:20px;letter-spacing:-0.3px;">// Essential Books — Read in Order</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;">
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
-        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">01 — FOUNDATIONS</div>
-        <div style="font-size:12px;color:var(--text);">Deep Learning — Goodfellow, Bengio & Courville</div>
-        <div style="font-size:11px;color:var(--muted);">deeplearningbook.org (free)</div>
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="section-label">Learning Roadmap — 10 Phases</div>
+  <div class="roadmap-phases">
+    <div class="phase-card" onclick="scrollToSection('math')">
+      <div class="phase-num">PHASE 01</div>
+      <div class="phase-title" style="color:var(--cat-math)">Math Foundations</div>
+      <div class="phase-desc">Linear algebra, probability, information theory, optimization, calculus — the bedrock everything else builds on.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">SVD/PCA</span><span class="phase-topic-tag">Entropy</span><span class="phase-topic-tag">KL Divergence</span><span class="phase-topic-tag">Adam</span><span class="phase-topic-tag">Backprop</span><span class="phase-topic-tag">MLE</span>
       </div>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
-        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">02 — NLP CORE</div>
-        <div style="font-size:12px;color:var(--text);">Speech & Language Processing — Jurafsky & Martin</div>
-        <div style="font-size:11px;color:var(--muted);">web.stanford.edu/~jurafsky/slp3 (free)</div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('fundamentals')">
+      <div class="phase-num">PHASE 02</div>
+      <div class="phase-title" style="color:var(--cat-fundamentals)">NLP Fundamentals</div>
+      <div class="phase-desc">Tokenization, POS tagging, NER, parsing — the linguistic and text processing pipeline.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">BPE</span><span class="phase-topic-tag">Tokenization</span><span class="phase-topic-tag">NER</span><span class="phase-topic-tag">Parsing</span><span class="phase-topic-tag">SentencePiece</span>
       </div>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
-        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">03 — TRANSFORMERS</div>
-        <div style="font-size:12px;color:var(--text);">Natural Language Processing with Transformers — Tunstall et al.</div>
-        <div style="font-size:11px;color:var(--muted);">O'Reilly (HuggingFace book)</div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('classical')">
+      <div class="phase-num">PHASE 03</div>
+      <div class="phase-title" style="color:var(--cat-classical)">Classical NLP</div>
+      <div class="phase-desc">N-gram models, HMMs, CRFs, TF-IDF, LDA — understanding where modern NLP came from.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">n-grams</span><span class="phase-topic-tag">HMM</span><span class="phase-topic-tag">CRF</span><span class="phase-topic-tag">TF-IDF</span><span class="phase-topic-tag">BM25</span><span class="phase-topic-tag">LDA</span>
       </div>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
-        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">04 — ALIGNMENT</div>
-        <div style="font-size:12px;color:var(--text);">Reinforcement Learning from Human Feedback — Nathan Lambert</div>
-        <div style="font-size:11px;color:var(--muted);">rlhfbook.com (free)</div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('embeddings')">
+      <div class="phase-num">PHASE 04</div>
+      <div class="phase-title" style="color:var(--cat-embeddings)">Word Embeddings</div>
+      <div class="phase-desc">Word2Vec, GloVe, FastText, ELMo — from static to contextual representations.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">Word2Vec</span><span class="phase-topic-tag">GloVe</span><span class="phase-topic-tag">FastText</span><span class="phase-topic-tag">ELMo</span><span class="phase-topic-tag">Neg Sampling</span>
       </div>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
-        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">05 — MATH</div>
-        <div style="font-size:12px;color:var(--text);">Mathematics for Machine Learning — Deisenroth et al.</div>
-        <div style="font-size:11px;color:var(--muted);">mml-book.github.io (free)</div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('neural')">
+      <div class="phase-num">PHASE 05</div>
+      <div class="phase-title" style="color:var(--cat-neural)">Neural NLP & Seq2Seq</div>
+      <div class="phase-desc">RNNs, LSTMs, GRUs, seq2seq, attention — the neural revolution before transformers.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">LSTM</span><span class="phase-topic-tag">GRU</span><span class="phase-topic-tag">Seq2Seq</span><span class="phase-topic-tag">Attention</span><span class="phase-topic-tag">Copy Nets</span>
       </div>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px;">
-        <div style="font-size:11px;color:var(--accent5);font-weight:700;margin-bottom:4px;">06 — PRODUCTION</div>
-        <div style="font-size:12px;color:var(--text);">Designing Machine Learning Systems — Chip Huyen</div>
-        <div style="font-size:11px;color:var(--muted);">O'Reilly</div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('transformers')">
+      <div class="phase-num">PHASE 06</div>
+      <div class="phase-title" style="color:var(--cat-transformers)">Transformers & LLM Arch</div>
+      <div class="phase-desc">Attention Is All You Need through modern architectures — BERT, GPT, T5, MoE, Mamba, Flash Attention.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">Transformer</span><span class="phase-topic-tag">BERT</span><span class="phase-topic-tag">GPT</span><span class="phase-topic-tag">FlashAttn</span><span class="phase-topic-tag">MoE</span><span class="phase-topic-tag">RoPE</span>
+      </div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('llm')">
+      <div class="phase-num">PHASE 07</div>
+      <div class="phase-title" style="color:var(--cat-llm)">LLMs & Pre-training</div>
+      <div class="phase-desc">Scaling laws, data curation, distributed training, open models — building and training LLMs.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">Scaling Laws</span><span class="phase-topic-tag">Chinchilla</span><span class="phase-topic-tag">LLaMA</span><span class="phase-topic-tag">ZeRO</span><span class="phase-topic-tag">Megatron</span>
+      </div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('finetuning')">
+      <div class="phase-num">PHASE 08</div>
+      <div class="phase-title" style="color:var(--cat-finetuning)">Fine-tuning & Alignment</div>
+      <div class="phase-desc">LoRA, RLHF, DPO, Constitutional AI, instruction tuning — making LLMs useful and safe.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">LoRA</span><span class="phase-topic-tag">QLoRA</span><span class="phase-topic-tag">RLHF</span><span class="phase-topic-tag">DPO</span><span class="phase-topic-tag">CAI</span><span class="phase-topic-tag">ORPO</span>
+      </div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('rl')">
+      <div class="phase-num">PHASE 09</div>
+      <div class="phase-title" style="color:var(--cat-rl)">RL for LLMs</div>
+      <div class="phase-desc">PPO, GRPO, reward modeling, policy gradient theory — the RL that powers reasoning models.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">PPO</span><span class="phase-topic-tag">GRPO</span><span class="phase-topic-tag">TRPO</span><span class="phase-topic-tag">GAE</span><span class="phase-topic-tag">Reward Hacking</span>
+      </div>
+    </div>
+    <div class="phase-card" onclick="scrollToSection('reasoning')">
+      <div class="phase-num">PHASE 10</div>
+      <div class="phase-title" style="color:var(--cat-reasoning)">Reasoning & Inference</div>
+      <div class="phase-desc">CoT, ToT, PRMs, test-time compute, o1/R1 — building Claude-level reasoning capabilities.</div>
+      <div class="phase-topics">
+        <span class="phase-topic-tag">CoT</span><span class="phase-topic-tag">ToT</span><span class="phase-topic-tag">PRM</span><span class="phase-topic-tag">RAG</span><span class="phase-topic-tag">DeepSeek-R1</span><span class="phase-topic-tag">o1</span>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- MUST-FOLLOW BLOGS -->
+<!-- MAIN CONTENT -->
+<main class="main-content" id="topicsMain"></main>
 
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:32px;margin-bottom:48px;">
-    <div style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--accent3);margin-bottom:20px;letter-spacing:-0.3px;">// Must-Follow Blogs & Channels</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;">
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://lilianweng.github.io/">Lilian Weng's Blog</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://jalammar.github.io/">Jay Alammar's Blog</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://sebastianraschka.com/blog/">Sebastian Raschka's Blog</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@AndrejKarpathy">Andrej Karpathy (YouTube)</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@YannicKilcher">Yannic Kilcher (YouTube)</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@umarjamilai">Umar Jamil (YouTube)</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-yt">YT</span><a href="https://www.youtube.com/@AICoffeeBreak">AI Coffee Break (YouTube)</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://www.interconnects.ai/">Nathan Lambert: Interconnects</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://newsletter.ruder.io/">Sebastian Ruder NLP Newsletter</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-blog">BLOG</span><a href="https://transformer-circuits.pub/">Anthropic: Transformer Circuits</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-course">COURSE</span><a href="https://cs224n.stanford.edu/">Stanford CS224N: NLP with Deep Learning</a></div>
-      <div class="resource" style="padding:8px;background:var(--surface2);border-radius:3px;"><span class="res-type res-course">COURSE</span><a href="https://fullstackdeeplearning.com/">Full Stack Deep Learning (Free)</a></div>
-    </div>
-  </div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-  <footer>
-    Built for the serious practitioner &nbsp;|&nbsp; <span>NLP → Reasoning Models Roadmap</span> &nbsp;|&nbsp; ~18 months to mastery
-  </footer>
+<footer>
+  <div class="footer-text">NLP → Reasoning Model Mastery Roadmap • 300+ Topics • 307 Resources</div>
+  <div class="footer-text">Built for advanced ML practitioners targeting Claude-level model capabilities</div>
+</footer>
 
-</div>
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────
+const rawData = [
+["Linear Algebra for NLP","Math Foundations","Core Math","Linear Algebra - Gilbert Strang MIT OCW","Course (Free)","Gilbert Strang","https://ocw.mit.edu/18-06","Vectors matrices eigenvalues - essential for embeddings and attention"],
+["Matrix Decompositions (SVD / PCA)","Math Foundations","Core Math","Matrix Methods in Data Analysis MIT 18.065","Course (Free)","Gilbert Strang","https://ocw.mit.edu/18-065","Covers SVD deeply - basis of LSA and word embeddings"],
+["Probability & Statistics","Math Foundations","Core Math","Probability Theory - The Logic of Science","Book","E.T. Jaynes","Cambridge University Press","Deep Bayesian probability thinking - foundational"],
+["Information Theory","Math Foundations","Information Theory","Elements of Information Theory","Book","Cover & Thomas","https://www.amazon.com","The definitive information theory book - entropy KL divergence mutual info"],
+["Information Theory","Math Foundations","Information Theory","A Short Introduction to Entropy Cross-Entropy and KL Divergence","Article","Aurélien Géron","https://towardsdatascience.com","Practical ML-focused information theory explainer"],
+["Entropy & Cross-Entropy","Math Foundations","Information Theory","Visual Information Theory","Article (Free)","Christopher Olah","https://colah.github.io/posts/2015-09-Visual-Information/","Beautiful visual explanation of entropy"],
+["KL Divergence","Math Foundations","Information Theory","KL Divergence Explained","Article","Count Bayesie","https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained","Intuitive KL divergence walkthrough"],
+["Mutual Information","Math Foundations","Information Theory","Mutual Information and NLP","Article","Various","https://towardsdatascience.com","Search 'mutual information NLP feature selection'"],
+["Calculus & Backpropagation","Math Foundations","Calculus","The Matrix Calculus You Need For Deep Learning","Paper (Free)","Parr & Howard 2018","https://arxiv.org/abs/1802.01528","Best matrix calculus reference for DL practitioners"],
+["Backpropagation","Math Foundations","Calculus","Calculus on Computational Graphs: Backpropagation","Article (Free)","Christopher Olah","https://colah.github.io/posts/2015-08-Backprop/","The clearest backprop explainer ever written"],
+["Optimization Theory","Math Foundations","Optimization","Convex Optimization","Book (Free)","Boyd & Vandenberghe","https://web.stanford.edu/~boyd/cvxbook/","Mathematical optimization foundations"],
+["SGD & Variants","Math Foundations","Optimization","An Overview of Gradient Descent Optimization Algorithms","Article","Sebastian Ruder","https://ruder.io/optimizing-gradient-descent/","The canonical SGD variants survey - bookmark this"],
+["Adam / AdamW","Math Foundations","Optimization","Adam: A Method for Stochastic Optimization","Paper","Kingma & Ba 2015","https://arxiv.org/abs/1412.6980","Original Adam paper - 100k+ citations"],
+["Bayesian Inference","Math Foundations","Probability","Pattern Recognition and Machine Learning","Book","Christopher Bishop","https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf","Chapters 1-3 cover Bayesian inference deeply"],
+["Maximum Likelihood Estimation","Math Foundations","Probability","MLE and Bayesian Estimation for NLP","Article","Various","https://towardsdatascience.com","Search 'MLE NLP language model'"],
+["Lagrange Multipliers & Constrained Optimization","Math Foundations","Optimization","Mathematics for Machine Learning","Book (Free)","Deisenroth et al.","https://mml-book.github.io","Chapters 5-7 cover optimization and calculus"],
+["Monte Carlo Methods","Math Foundations","Sampling","Monte Carlo Statistical Methods","Book","Robert & Casella","https://www.springer.com","MCMC sampling - used in RL and Bayesian NLP"],
+["Measure Theory Basics","Math Foundations","Advanced Math","Real Analysis - Baby Rudin","Book","Walter Rudin","https://www.amazon.com","For rigorous probability theory understanding"],
+["Graph Theory","Math Foundations","Discrete Math","Introduction to Graph Theory","Book","Douglas West","https://www.pearson.com","Useful for knowledge graphs and GNN-based NLP"],
+["Regular Languages & Automata","Math Foundations","Formal Languages","Introduction to Automata Theory Languages and Computation","Book","Hopcroft Motwani Ullman","https://www.pearson.com","Formal foundations of language theory"],
+["Context-Free Grammars","Math Foundations","Formal Languages","Linguistic Fundamentals for Natural Language Processing","Book","Emily Bender","https://www.morganclaypool.com","Bridges linguistics and NLP formally"],
+["Text Preprocessing","NLP Fundamentals","Basic NLP","Speech and Language Processing","Book (Free)","Jurafsky & Martin","https://web.stanford.edu/~jurafsky/slp3/","The Bible of NLP - covers everything basic to advanced free online"],
+["Tokenization","NLP Fundamentals","Basic NLP","Byte Pair Encoding (BPE) Paper","Paper","Sennrich et al. 2016","https://arxiv.org/abs/1508.07909","Original BPE tokenization paper used in GPT"],
+["Tokenization","NLP Fundamentals","Basic NLP","SentencePiece Tokenizer","Paper","Kudo & Richardson 2018","https://arxiv.org/abs/1808.06226","Used in T5 LLaMA and most modern LLMs"],
+["WordPiece Tokenization","NLP Fundamentals","Basic NLP","Google Neural Machine Translation System","Paper","Wu et al. 2016","https://arxiv.org/abs/1609.08144","WordPiece tokenization used in BERT"],
+["Stemming & Lemmatization","NLP Fundamentals","Basic NLP","NLTK Book Chapter 3","Book Chapter (Free)","Bird et al.","https://www.nltk.org/book/ch03.html","Classic text processing with Python"],
+["POS Tagging","NLP Fundamentals","Basic NLP","Speech and Language Processing Ch 8","Book Chapter (Free)","Jurafsky & Martin","https://web.stanford.edu/~jurafsky/slp3/8.pdf","HMM and neural POS tagging"],
+["Named Entity Recognition (NER)","NLP Fundamentals","Basic NLP","A Survey on Deep Learning for NER","Paper","Li et al. 2020","https://arxiv.org/abs/1812.09449","Comprehensive NER survey"],
+["Dependency Parsing","NLP Fundamentals","Syntactic","Speech and Language Processing Ch 14-15","Book Chapter (Free)","Jurafsky & Martin","https://web.stanford.edu/~jurafsky/slp3/","Covers transition-based and graph-based parsing"],
+["Constituency Parsing","NLP Fundamentals","Syntactic","The Stanford Parser","Article","Manning et al.","https://nlp.stanford.edu/software/lex-parser.html","Classic constituency parsing tool + theory"],
+["Coreference Resolution","NLP Fundamentals","Semantic","Speech and Language Processing Ch 21","Book Chapter (Free)","Jurafsky & Martin","https://web.stanford.edu/~jurafsky/slp3/21.pdf","Neural coreference resolution"],
+["Sentiment Analysis","NLP Fundamentals","Applications","Thumbs Up: Sentiment Classification using ML","Paper","Pang et al. 2002","https://aclanthology.org/W02-1011/","Classic sentiment analysis paper"],
+["Text Classification","NLP Fundamentals","Applications","A Convolutional Neural Network for Sentence Classification","Paper","Kim 2014","https://arxiv.org/abs/1408.5882","Foundational CNN text classification paper"],
+["n-gram Language Models","Classical NLP","Language Modeling","Speech and Language Processing Ch 3","Book Chapter (Free)","Jurafsky & Martin","https://web.stanford.edu/~jurafsky/slp3/3.pdf","N-gram LM with smoothing techniques"],
+["Smoothing Techniques","Classical NLP","Language Modeling","Kneser-Ney Smoothing Explained","Article","Various","https://towardsdatascience.com","Search 'Kneser Ney smoothing intuition'"],
+["Perplexity","Classical NLP","Language Modeling","Perplexity in NLP Explained","Article","Hugging Face","https://huggingface.co/docs/transformers/perplexity","Language model evaluation metric"],
+["Hidden Markov Models (HMM)","Classical NLP","Sequential Models","A Tutorial on HMMs and Applications","Paper (Free)","Rabiner 1989","https://www.cs.ubc.ca/~murphyk/Bayes/rabiner.pdf","The classic HMM tutorial paper"],
+["Viterbi Algorithm","Classical NLP","Sequential Models","Speech and Language Processing Ch 8","Book Chapter (Free)","Jurafsky & Martin","https://web.stanford.edu/~jurafsky/slp3/8.pdf","Viterbi decoding for sequence labeling"],
+["CRF (Conditional Random Fields)","Classical NLP","Sequential Models","Conditional Random Fields: Probabilistic Models for Segmenting Sequences","Paper","Lafferty et al. 2001","https://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers","Original CRF paper - widely used in NER"],
+["Naive Bayes for NLP","Classical NLP","Classical ML","Speech and Language Processing Ch 4","Book Chapter (Free)","Jurafsky & Martin","https://web.stanford.edu/~jurafsky/slp3/4.pdf","Text classification with Naive Bayes"],
+["TF-IDF","Classical NLP","Information Retrieval","Introduction to Information Retrieval","Book (Free)","Manning Raghavan Schütze","https://nlp.stanford.edu/IR-book/","The IR bible - TF-IDF BM25 and more"],
+["BM25","Classical NLP","Information Retrieval","The Probabilistic Relevance Framework: BM25","Paper","Robertson & Zaragoza 2009","https://www.nowpublishers.com/article/Details/INR-019","Canonical BM25 paper still used in modern RAG"],
+["Latent Semantic Analysis (LSA)","Classical NLP","Distributional Semantics","Indexing by Latent Semantic Analysis","Paper","Deerwester et al. 1990","https://asistdl.onlinelibrary.wiley.com/doi/10.1002/(SICI)1097-4571(199009)41:6%3C391::AID-ASI1%3E3.0.CO;2-9","Original LSA paper using SVD"],
+["LDA (Latent Dirichlet Allocation)","Classical NLP","Topic Modeling","Latent Dirichlet Allocation","Paper","Blei Ng Jordan 2003","https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf","Original LDA paper - foundational topic modeling"],
+["Word2Vec","Word Embeddings","Static Embeddings","Efficient Estimation of Word Representations in Vector Space","Paper","Mikolov et al. 2013","https://arxiv.org/abs/1301.3781","Original Word2Vec paper"],
+["Word2Vec","Word Embeddings","Static Embeddings","word2vec Explained","Paper","Yoav Goldberg","https://arxiv.org/abs/1402.3722","Mathematical explanation of Word2Vec by NLP expert"],
+["GloVe","Word Embeddings","Static Embeddings","GloVe: Global Vectors for Word Representation","Paper","Pennington et al. 2014","https://nlp.stanford.edu/pubs/glove.pdf","Stanford GloVe embeddings paper"],
+["FastText","Word Embeddings","Static Embeddings","Enriching Word Vectors with Subword Information","Paper","Bojanowski et al. 2017","https://arxiv.org/abs/1607.04606","FastText - handles morphology and OOV words"],
+["Negative Sampling","Word Embeddings","Static Embeddings","Word2Vec Tutorial - The Skip-Gram Model","Article","Chris McCormick","https://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/","Clear explanation of skip-gram and negative sampling"],
+["ELMo","Word Embeddings","Contextual Embeddings","Deep Contextualized Word Representations","Paper","Peters et al. 2018","https://arxiv.org/abs/1802.05365","First major contextual embedding paper"],
+["Recurrent Neural Networks","Neural NLP","Sequential Models","The Unreasonable Effectiveness of RNNs","Article (Free)","Andrej Karpathy","https://karpathy.github.io/2015/05/21/rnn-effectiveness/","The most famous RNN introduction"],
+["LSTM","Neural NLP","Sequential Models","Long Short-Term Memory","Paper","Hochreiter & Schmidhuber 1997","https://www.bioinf.jku.at/publications/older/2604.pdf","Original LSTM paper"],
+["LSTM","Neural NLP","Sequential Models","Understanding LSTM Networks","Article (Free)","Christopher Olah","https://colah.github.io/posts/2015-08-Understanding-LSTMs/","The clearest LSTM explainer"],
+["GRU","Neural NLP","Sequential Models","Learning Phrase Representations using RNN Encoder-Decoder","Paper","Cho et al. 2014","https://arxiv.org/abs/1406.1078","GRU introduction paper - also introduces encoder-decoder for MT"],
+["Seq2Seq","Neural NLP","Sequential Models","Sequence to Sequence Learning with Neural Networks","Paper","Sutskever Vinyals Le 2014","https://arxiv.org/abs/1409.3215","Original seq2seq paper - foundation of modern NMT"],
+["Attention Mechanism","Neural NLP","Attention","Neural Machine Translation by Jointly Learning to Align and Translate","Paper","Bahdanau et al. 2015","https://arxiv.org/abs/1409.0473","Original attention mechanism paper"],
+["Attention Mechanism","Neural NLP","Attention","Attention? Attention!","Article (Free)","Lilian Weng","https://lilianweng.github.io/posts/2018-06-24-attention/","Comprehensive attention mechanism survey blog post"],
+["Transformer Architecture","Transformers","Core Architecture","Attention Is All You Need","Paper","Vaswani et al. 2017","https://arxiv.org/abs/1706.03762","The most important NLP paper of the decade"],
+["Transformer Architecture","Transformers","Core Architecture","The Illustrated Transformer","Article (Free)","Jay Alammar","https://jalammar.github.io/illustrated-transformer/","Best visual explanation of transformer architecture"],
+["Transformer Architecture","Transformers","Core Architecture","Annotated Transformer","Article (Free)","Harvard NLP","https://nlp.seas.harvard.edu/annotated-transformer/","Line-by-line annotated PyTorch transformer implementation"],
+["Self-Attention","Transformers","Core Architecture","Self-Attention from Scratch","Article","Various","https://towardsdatascience.com","Search 'self-attention from scratch pytorch'"],
+["Positional Encoding","Transformers","Core Architecture","A Gentle Introduction to Positional Encoding","Article","Amirhossein Kazemnejad","https://kazemnejad.com/blog/transformer_architecture_positional_encoding/","Math behind sinusoidal and learned positional encodings"],
+["Rotary Positional Embedding (RoPE)","Transformers","Positional Encoding","RoFormer: Enhanced Transformer with Rotary Position Embedding","Paper","Su et al. 2021","https://arxiv.org/abs/2104.09864","RoPE used in LLaMA GPT-NeoX and most modern LLMs"],
+["ALiBi","Transformers","Positional Encoding","Train Short Test Long: Attention with Linear Biases","Paper","Press et al. 2022","https://arxiv.org/abs/2108.12409","Length extrapolation positional bias"],
+["Layer Normalization","Transformers","Core Architecture","Layer Normalization","Paper","Ba et al. 2016","https://arxiv.org/abs/1607.06450","Original LayerNorm paper - used in every transformer"],
+["RMSNorm","Transformers","Core Architecture","Root Mean Square Layer Normalization","Paper","Zhang & Sennrich 2019","https://arxiv.org/abs/1910.07467","Used in LLaMA and modern efficient transformers"],
+["SwiGLU / GLU Variants","Transformers","Core Architecture","GLU Variants Improve Transformer","Paper","Noam Shazeer 2020","https://arxiv.org/abs/2002.05202","Used in PaLM LLaMA Mistral - activation function upgrade"],
+["BERT","Transformers","Encoder Models","BERT: Pre-training of Deep Bidirectional Transformers","Paper","Devlin et al. 2019","https://arxiv.org/abs/1810.04805","The paper that changed NLP - encoder pre-training"],
+["BERT","Transformers","Encoder Models","The Illustrated BERT","Article (Free)","Jay Alammar","https://jalammar.github.io/illustrated-bert/","Visual BERT explainer by Jay Alammar"],
+["RoBERTa","Transformers","Encoder Models","RoBERTa: A Robustly Optimized BERT Pretraining Approach","Paper","Liu et al. 2019","https://arxiv.org/abs/1907.11692","Key BERT improvements - longer training more data"],
+["ALBERT","Transformers","Encoder Models","ALBERT: A Lite BERT for Self-supervised Learning","Paper","Lan et al. 2020","https://arxiv.org/abs/1909.11942","Parameter reduction techniques for BERT"],
+["DistilBERT","Transformers","Encoder Models","DistilBERT: a distilled version of BERT","Paper","Sanh et al. 2019","https://arxiv.org/abs/1910.01108","Knowledge distillation applied to BERT"],
+["DeBERTa","Transformers","Encoder Models","DeBERTa: Decoding-enhanced BERT with Disentangled Attention","Paper","He et al. 2021","https://arxiv.org/abs/2006.03654","Microsoft's BERT variant - long-held GLUE SOTA"],
+["GPT","Transformers","Decoder Models","Improving Language Understanding by Generative Pre-Training","Paper","Radford et al. 2018","https://openai.com/research/language-unsupervised","Original GPT paper - decoder-only pre-training"],
+["GPT-2","Transformers","Decoder Models","Language Models are Unsupervised Multitask Learners","Paper","Radford et al. 2019","https://openai.com/research/better-language-models","GPT-2 paper introducing zero-shot capabilities"],
+["GPT-3","Transformers","Decoder Models","Language Models are Few-Shot Learners","Paper","Brown et al. 2020","https://arxiv.org/abs/2005.14165","GPT-3 paper - in-context learning at scale"],
+["The Illustrated GPT-2","Transformers","Decoder Models","The Illustrated GPT-2","Article (Free)","Jay Alammar","https://jalammar.github.io/illustrated-gpt2/","Visual autoregressive language model explainer"],
+["T5","Transformers","Encoder-Decoder Models","Exploring the Limits of Transfer Learning with T5","Paper","Raffel et al. 2020","https://arxiv.org/abs/1910.10683","Text-to-text framework - highly influential"],
+["BART","Transformers","Encoder-Decoder Models","BART: Denoising Sequence-to-Sequence Pre-training","Paper","Lewis et al. 2020","https://arxiv.org/abs/1910.13461","Denoising encoder-decoder - great for summarization"],
+["mT5 / mBART","Transformers","Multilingual Models","mT5: A Massively Multilingual Pre-Trained Text-to-Text Transformer","Paper","Xue et al. 2021","https://arxiv.org/abs/2010.11934","Multilingual T5"],
+["XLM-R","Transformers","Multilingual Models","Unsupervised Cross-lingual Representation Learning at Scale","Paper","Conneau et al. 2020","https://arxiv.org/abs/1911.02116","Best multilingual encoder - widely used"],
+["Efficient Transformers","Transformers","Efficient Architectures","Efficient Transformers: A Survey","Paper","Tay et al. 2022","https://arxiv.org/abs/2009.06732","Comprehensive survey of all efficient transformer variants"],
+["Longformer","Transformers","Efficient Architectures","Longformer: The Long-Document Transformer","Paper","Beltagy et al. 2020","https://arxiv.org/abs/2004.05150","Sliding window + global attention for long docs"],
+["Flash Attention","Transformers","Efficient Architectures","FlashAttention: Fast and Memory-Efficient Exact Attention","Paper","Dao et al. 2022","https://arxiv.org/abs/2205.14135","Crucial hardware-aware attention algorithm used in all modern LLMs"],
+["Flash Attention 2","Transformers","Efficient Architectures","FlashAttention-2: Faster Attention with Better Parallelism","Paper","Dao 2023","https://arxiv.org/abs/2307.08691","Major speed improvement over FlashAttention-1"],
+["Mixture of Experts (MoE)","Transformers","Architecture Advances","Outrageously Large Neural Networks: The Sparsely-Gated MoE","Paper","Shazeer et al. 2017","https://arxiv.org/abs/1701.06538","Original sparse MoE - basis of Mixtral and GPT-4 architecture"],
+["Switch Transformer","Transformers","Architecture Advances","Switch Transformers: Scaling to Trillion Parameter Models","Paper","Fedus et al. 2022","https://arxiv.org/abs/2101.03961","Simplifies MoE routing - Google's trillion parameter work"],
+["Mixtral","Transformers","Architecture Advances","Mixtral of Experts","Paper","Mistral AI 2024","https://arxiv.org/abs/2401.04088","Open MoE model - excellent architecture reference"],
+["Mamba / State Space Models","Transformers","Architecture Advances","Mamba: Linear-Time Sequence Modeling with Selective State Spaces","Paper","Gu & Dao 2023","https://arxiv.org/abs/2312.00752","SSM alternative to transformers - major architecture shift"],
+["RWKV","Transformers","Architecture Advances","RWKV: Reinventing RNNs for the Transformer Era","Paper","Peng et al. 2023","https://arxiv.org/abs/2305.13048","RNN with transformer-level performance"],
+["Grouped Query Attention","Transformers","Architecture Advances","GQA: Training Generalized Multi-Query Transformer Models","Paper","Ainslie et al. 2023","https://arxiv.org/abs/2305.13245","Used in LLaMA 2/3 Mistral for efficient inference"],
+["Scaling Laws","Large Language Models","Scaling","Scaling Laws for Neural Language Models","Paper","Kaplan et al. 2020","https://arxiv.org/abs/2001.08361","OpenAI scaling laws paper - compute-optimal training"],
+["Chinchilla Scaling","Large Language Models","Scaling","Training Compute-Optimal Large Language Models","Paper","Hoffmann et al. 2022","https://arxiv.org/abs/2203.05482","Chinchilla - overturns Kaplan scaling laws"],
+["Emergent Abilities","Large Language Models","Scaling","Emergent Abilities of Large Language Models","Paper","Wei et al. 2022","https://arxiv.org/abs/2206.07682","Documents surprising emergent capabilities at scale"],
+["LLaMA 1","Large Language Models","Open Models","LLaMA: Open and Efficient Foundation Language Models","Paper","Touvron et al. 2023","https://arxiv.org/abs/2302.13971","Meta's open LLaMA - democratized LLM research"],
+["LLaMA 2","Large Language Models","Open Models","Llama 2: Open Foundation and Fine-Tuned Chat Models","Paper","Touvron et al. 2023","https://arxiv.org/abs/2307.09288","LLaMA 2 with chat models and safety techniques"],
+["LLaMA 3","Large Language Models","Open Models","Meta Llama 3","Technical Report","Meta AI 2024","https://arxiv.org/abs/2407.21783","LLaMA 3 technical details"],
+["Mistral 7B","Large Language Models","Open Models","Mistral 7B","Paper","Jiang et al. 2023","https://arxiv.org/abs/2310.06825","Efficient open model with GQA and SWA"],
+["Gemma","Large Language Models","Open Models","Gemma: Open Models Based on Gemini Research","Paper","Google DeepMind 2024","https://arxiv.org/abs/2403.08295","Google's open model series"],
+["Phi Series","Large Language Models","Open Models","Phi-1: Textbooks Are All You Need","Paper","Gunasekar et al. 2023","https://arxiv.org/abs/2306.11644","Small but powerful - data quality over quantity"],
+["PaLM","Large Language Models","Closed Models","PaLM: Scaling Language Modeling with Pathways","Paper","Chowdhery et al. 2022","https://arxiv.org/abs/2204.02311","Google's 540B parameter model"],
+["Claude & Constitutional AI","Large Language Models","Closed Models","Constitutional AI: Harmlessness from AI Feedback","Paper","Bai et al. 2022","https://arxiv.org/abs/2212.08073","Anthropic's CAI - core Claude training method"],
+["Gemini","Large Language Models","Closed Models","Gemini: A Family of Highly Capable Multimodal Models","Paper","Google DeepMind 2023","https://arxiv.org/abs/2312.11805","Google's multimodal LLM"],
+["Masked Language Modeling","LLM Training","Pre-training","BERT Paper Section 3","Paper","Devlin et al. 2019","https://arxiv.org/abs/1810.04805","MLM objective details in BERT"],
+["Data Deduplication","LLM Training","Pre-training","Deduplicating Training Data Makes Language Models Better","Paper","Lee et al. 2022","https://arxiv.org/abs/2107.06499","Important data cleaning for LLM pre-training"],
+["The Pile Dataset","LLM Training","Pre-training","The Pile: An 800GB Dataset of Diverse Text","Paper","Gao et al. 2020","https://arxiv.org/abs/2101.00027","Influential open pre-training dataset"],
+["FineWeb","LLM Training","Pre-training","FineWeb: Decanting the Web for the Finest Text Data","Paper","Penedo et al. 2024","https://arxiv.org/abs/2406.17557","Hugging Face's high quality web dataset"],
+["Mixed Precision Training","LLM Training","Infrastructure","Mixed Precision Training","Paper","Micikevicius et al. 2018","https://arxiv.org/abs/1710.03740","FP16 training for efficiency"],
+["Megatron-LM","LLM Training","Distributed Training","Megatron-LM: Training Multi-Billion Parameter Language Models","Paper","Shoeybi et al. 2019","https://arxiv.org/abs/1909.08053","Tensor parallelism for LLM training at scale"],
+["ZeRO Optimizer","LLM Training","Distributed Training","ZeRO: Memory Optimizations Toward Training Trillion Parameter Models","Paper","Rajbhandari et al. 2020","https://arxiv.org/abs/1910.02054","DeepSpeed ZeRO - enables training massive models on commodity hardware"],
+["DeepSpeed","LLM Training","Distributed Training","DeepSpeed Documentation","Documentation","Microsoft","https://www.deepspeed.ai","Practical distributed training toolkit"],
+["Instruction Tuning","Fine-tuning & Alignment","Fine-Tuning Methods","Finetuned Language Models Are Zero-Shot Learners (FLAN)","Paper","Wei et al. 2022","https://arxiv.org/abs/2109.01652","Instruction tuning for zero-shot generalization"],
+["LoRA","Fine-tuning & Alignment","PEFT Methods","LoRA: Low-Rank Adaptation of Large Language Models","Paper","Hu et al. 2022","https://arxiv.org/abs/2106.09685","Most popular PEFT method - widely used in open LLM community"],
+["QLoRA","Fine-tuning & Alignment","PEFT Methods","QLoRA: Efficient Finetuning of Quantized LLMs","Paper","Dettmers et al. 2023","https://arxiv.org/abs/2305.14314","4-bit quantization + LoRA enables fine-tuning 65B on single GPU"],
+["Prefix Tuning","Fine-tuning & Alignment","PEFT Methods","Prefix-Tuning: Optimizing Continuous Prompts for Generation","Paper","Li & Liang 2021","https://arxiv.org/abs/2101.00190","Soft prompt prepended to input"],
+["Adapter Layers","Fine-tuning & Alignment","PEFT Methods","Parameter-Efficient Transfer Learning for NLP","Paper","Houlsby et al. 2019","https://arxiv.org/abs/1902.00751","Original adapter paper for NLP"],
+["DoRA","Fine-tuning & Alignment","PEFT Methods","DoRA: Weight-Decomposed Low-Rank Adaptation","Paper","Liu et al. 2024","https://arxiv.org/abs/2402.09353","Improvement over LoRA by decomposing weight matrices"],
+["RLHF","Fine-tuning & Alignment","Alignment","Training Language Models to Follow Instructions with Human Feedback","Paper","Ouyang et al. 2022","https://arxiv.org/abs/2203.02155","InstructGPT paper - the blueprint for ChatGPT"],
+["Reward Modeling","Fine-tuning & Alignment","Alignment","Reward Model Ensembles Help Mitigate Overoptimization","Paper","Coste et al. 2023","https://arxiv.org/abs/2310.02743","Reward hacking and overoptimization in RLHF"],
+["DPO","Fine-tuning & Alignment","Alignment","Direct Preference Optimization: Your Language Model is Secretly a Reward Model","Paper","Rafailov et al. 2023","https://arxiv.org/abs/2305.18290","Eliminates RL from RLHF - hugely influential"],
+["IPO","Fine-tuning & Alignment","Alignment","A General Theoretical Paradigm to Understand Learning from Human Feedback","Paper","Azar et al. 2024","https://arxiv.org/abs/2310.12036","Alternative to DPO with theoretical guarantees"],
+["KTO","Fine-tuning & Alignment","Alignment","KTO: Model Alignment as Prospect Theoretic Optimization","Paper","Ethayarajh et al. 2024","https://arxiv.org/abs/2402.01306","Kahneman-Tversky optimization for alignment"],
+["ORPO","Fine-tuning & Alignment","Alignment","ORPO: Monolithic Preference Optimization without Reference Model","Paper","Hong et al. 2024","https://arxiv.org/abs/2403.07691","Efficient single-stage preference optimization"],
+["RLAIF","Fine-tuning & Alignment","Alignment","RLAIF: Scaling Reinforcement Learning from Human Feedback with AI Feedback","Paper","Lee et al. 2023","https://arxiv.org/abs/2309.00267","Replace human feedback with AI feedback for scalability"],
+["Self-Play Fine-Tuning","Fine-tuning & Alignment","Advanced Fine-tuning","Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models","Paper","Chen et al. 2024","https://arxiv.org/abs/2401.01335","SPIN - self-play for LLM fine-tuning"],
+["Synthetic Data","Fine-tuning & Alignment","Advanced Fine-tuning","Self-Instruct: Aligning Language Models with Self-Generated Instructions","Paper","Wang et al. 2023","https://arxiv.org/abs/2212.10560","Bootstrap instruction data from LLMs"],
+["Policy Gradient / REINFORCE","Reinforcement Learning","Core RL","Policy Gradient Methods for RL with Function Approximation","Paper","Sutton et al. 2000","https://papers.nips.cc/paper/1999/hash/464d828b85b0bed98e80ade0a5c43b0f-Abstract.html","Original policy gradient paper"],
+["RL Fundamentals","Reinforcement Learning","Core RL","Reinforcement Learning: An Introduction","Book (Free)","Sutton & Barto","https://incompleteideas.net/book/the-book-2nd.html","The RL bible - free online second edition"],
+["PPO","Reinforcement Learning","Policy Optimization","Proximal Policy Optimization Algorithms","Paper","Schulman et al. 2017","https://arxiv.org/abs/1707.06347","PPO paper - core algorithm in RLHF fine-tuning"],
+["TRPO","Reinforcement Learning","Policy Optimization","Trust Region Policy Optimization","Paper","Schulman et al. 2015","https://arxiv.org/abs/1502.05477","TRPO paper - theoretical basis for PPO"],
+["GAE (Generalized Advantage Estimation)","Reinforcement Learning","Policy Optimization","High-Dimensional Continuous Control Using Generalized Advantage Estimation","Paper","Schulman et al. 2016","https://arxiv.org/abs/1506.02438","GAE used in PPO for variance reduction"],
+["GRPO","Reinforcement Learning","RLHF-Specific RL","DeepSeekMath: Pushing the Limits of Mathematical Reasoning","Paper","Shao et al. 2024","https://arxiv.org/abs/2402.03300","Group Relative Policy Optimization - used in DeepSeek-R1"],
+["GRPO Details","Reinforcement Learning","RLHF-Specific RL","DeepSeek-R1: Incentivizing Reasoning Capability via RL","Paper","DeepSeek 2025","https://arxiv.org/abs/2501.12948","Full DeepSeek-R1 paper with GRPO details"],
+["Reward Hacking & Goodhart's Law","Reinforcement Learning","Alignment RL","Concrete Problems in AI Safety","Paper","Amodei et al. 2016","https://arxiv.org/abs/1606.06565","Reward hacking specification gaming and AI safety"],
+["Monte Carlo Tree Search","Reinforcement Learning","Planning","Mastering the Game of Go with Deep Neural Networks (AlphaGo)","Paper","Silver et al. 2016","https://www.nature.com/articles/nature16961","MCTS + RL - basis for reasoning-time compute"],
+["KL Divergence in RLHF","Reinforcement Learning","RLHF-Specific RL","Secrets of RLHF in Large Language Models","Paper","Zheng et al. 2023","https://arxiv.org/abs/2307.04964","Detailed RLHF implementation secrets"],
+["Deep RL Course","Reinforcement Learning","Courses","Deep RL Course by Hugging Face","Course (Free)","Thomas Simonini","https://huggingface.co/learn/deep-rl-course","Full RL course including PPO and RLHF units"],
+["Chain-of-Thought Prompting","Reasoning & Inference","Prompting","Chain-of-Thought Prompting Elicits Reasoning in Large Language Models","Paper","Wei et al. 2022","https://arxiv.org/abs/2201.11903","Original CoT paper - step-by-step reasoning"],
+["Zero-Shot CoT","Reasoning & Inference","Prompting","Large Language Models are Zero-Shot Reasoners","Paper","Kojima et al. 2022","https://arxiv.org/abs/2205.11916","'Let's think step by step' - zero-shot chain of thought"],
+["Self-Consistency","Reasoning & Inference","Prompting","Self-Consistency Improves Chain of Thought Reasoning","Paper","Wang et al. 2023","https://arxiv.org/abs/2203.11171","Sample multiple CoT paths then majority vote"],
+["Tree of Thoughts","Reasoning & Inference","Prompting","Tree of Thoughts: Deliberate Problem Solving with LLMs","Paper","Yao et al. 2023","https://arxiv.org/abs/2305.10601","Search over reasoning paths with LLM evaluator"],
+["ReAct","Reasoning & Inference","Prompting","ReAct: Synergizing Reasoning and Acting in Language Models","Paper","Yao et al. 2023","https://arxiv.org/abs/2210.03629","Interleaved reasoning and tool use - basis of agents"],
+["In-Context Learning","Reasoning & Inference","Inference-Time","A Survey on In-context Learning","Paper","Dong et al. 2023","https://arxiv.org/abs/2301.00234","Comprehensive ICL survey"],
+["RAG","Reasoning & Inference","RAG","Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks","Paper","Lewis et al. 2021","https://arxiv.org/abs/2005.11401","Original RAG paper from Meta"],
+["Advanced RAG","Reasoning & Inference","RAG","Retrieval-Augmented Generation for LLMs: A Survey","Paper","Gao et al. 2024","https://arxiv.org/abs/2312.10997","Comprehensive RAG survey covering naive advanced modular RAG"],
+["Process Reward Models (PRM)","Reasoning & Inference","Reasoning","Let's Verify Step by Step","Paper","Lightman et al. 2023","https://arxiv.org/abs/2305.20050","OpenAI's PRM800K - step-level reward models"],
+["Test-Time Compute Scaling","Reasoning & Inference","Reasoning","Scaling LLM Test-Time Compute Optimally","Paper","Snell et al. 2024","https://arxiv.org/abs/2408.03314","Compute-optimal test-time scaling"],
+["o1 / Reasoning Models","Reasoning & Inference","Reasoning","OpenAI o1 System Card","Technical Report","OpenAI 2024","https://openai.com/index/openai-o1-system-card/","o1 system card - reasoning with RL"],
+["DeepSeek-R1","Reasoning & Inference","Reasoning","DeepSeek-R1: Incentivizing Reasoning Capability via RL","Paper","DeepSeek 2025","https://arxiv.org/abs/2501.12948","Open reasoning model trained with GRPO - hugely influential"],
+["Beam Search","Generation","Decoding Strategies","The Curious Case of Neural Text Degeneration","Paper","Holtzman et al. 2020","https://arxiv.org/abs/1904.09751","Analyzes beam search failure modes introduces nucleus sampling"],
+["Top-p / Nucleus Sampling","Generation","Decoding Strategies","The Curious Case of Neural Text Degeneration","Paper","Holtzman et al. 2020","https://arxiv.org/abs/1904.09751","Original nucleus sampling paper"],
+["Temperature Sampling","Generation","Decoding Strategies","How to Generate Text (HuggingFace Blog)","Article","Patrick von Platen","https://huggingface.co/blog/how-to-generate","Comprehensive decoding strategies explainer"],
+["Speculative Decoding","Generation","Efficient Inference","Fast Inference from Transformers via Speculative Decoding","Paper","Leviathan et al. 2023","https://arxiv.org/abs/2211.17192","Use small draft model to speed up large model inference"],
+["KV Cache & PagedAttention","Generation","Efficient Inference","Efficient Memory Management for LLM Serving with PagedAttention","Paper","Kwon et al. 2023","https://arxiv.org/abs/2309.06180","vLLM paper - PagedAttention for efficient KV cache management"],
+["Machine Translation","NLP Applications","Core Applications","Attention Is All You Need","Paper","Vaswani et al. 2017","https://arxiv.org/abs/1706.03762","Transformer for MT - the breakthrough paper"],
+["Text Summarization","NLP Applications","Core Applications","PEGASUS: Pre-training with Extracted Gap-sentences for Abstractive Summarization","Paper","Zhang et al. 2020","https://arxiv.org/abs/1912.08777","State-of-art summarization model"],
+["Question Answering","NLP Applications","Core Applications","SQuAD: 100000+ Questions for Machine Comprehension","Paper","Rajpurkar et al. 2016","https://arxiv.org/abs/1606.05250","SQuAD dataset paper - standard QA benchmark"],
+["Dense Retrieval","NLP Applications","IR & Search","Dense Passage Retrieval for Open-Domain QA","Paper","Karpukhin et al. 2020","https://arxiv.org/abs/2004.04906","DPR - dense retrieval for open-domain QA"],
+["ColBERT","NLP Applications","IR & Search","ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction","Paper","Khattab & Zaharia 2020","https://arxiv.org/abs/2004.12832","Late interaction retrieval - used in RAG"],
+["Sentence Embeddings (SBERT)","NLP Applications","Embeddings","Sentence-BERT: Sentence Embeddings using Siamese BERT Networks","Paper","Reimers & Gurevych 2019","https://arxiv.org/abs/1908.10084","SBERT - standard sentence embeddings"],
+["Code Generation","NLP Applications","Code","Evaluating Large Language Models Trained on Code (Codex)","Paper","Chen et al. 2021","https://arxiv.org/abs/2107.03374","GitHub Copilot paper - code LLM foundation"],
+["Code Generation","NLP Applications","Code","Code Llama: Open Foundation Models for Code","Paper","Rozière et al. 2023","https://arxiv.org/abs/2308.12950","Meta's open code model"],
+["Mathematical Reasoning","NLP Applications","Reasoning","Measuring Mathematical Problem Solving with MATH Dataset","Paper","Hendrycks et al. 2021","https://arxiv.org/abs/2103.03874","MATH benchmark - hard competition math"],
+["CLIP","Multimodal","Vision-Language","CLIP: Learning Transferable Visual Models from Natural Language Supervision","Paper","Radford et al. 2021","https://arxiv.org/abs/2103.00020","CLIP - zero-shot vision-language model"],
+["LLaVA","Multimodal","Vision-Language","LLaVA: Visual Instruction Tuning","Paper","Liu et al. 2023","https://arxiv.org/abs/2304.08485","Open multimodal instruction-tuning"],
+["Flamingo","Multimodal","Vision-Language","Flamingo: a Visual Language Model for Few-Shot Learning","Paper","Alayrac et al. 2022","https://arxiv.org/abs/2204.14198","DeepMind's visual language model"],
+["Quantization (GPTQ)","Deployment & Efficiency","Model Compression","GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers","Paper","Frantar et al. 2022","https://arxiv.org/abs/2210.17323","4-bit quantization for LLMs"],
+["QLoRA Quantization","Deployment & Efficiency","Model Compression","LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale","Paper","Dettmers et al. 2022","https://arxiv.org/abs/2208.07339","8-bit quantization enabling large model inference on consumer GPUs"],
+["Knowledge Distillation","Deployment & Efficiency","Model Compression","Distilling the Knowledge in a Neural Network","Paper","Hinton et al. 2015","https://arxiv.org/abs/1503.02531","Original knowledge distillation paper"],
+["vLLM","Deployment & Efficiency","Efficient Inference","vLLM Documentation","Documentation","vLLM team","https://docs.vllm.ai","High-throughput LLM serving framework"],
+["LLM Agents (Survey)","Agents","Agent Systems","A Survey on Large Language Model based Autonomous Agents","Paper","Wang et al. 2023","https://arxiv.org/abs/2308.11432","Comprehensive agent survey"],
+["LLM Agents (Blog)","Agents","Agent Systems","LLM Powered Autonomous Agents","Article (Free)","Lilian Weng","https://lilianweng.github.io/posts/2023-06-23-agent/","Weng's famous agent overview blog post"],
+["Toolformer","Agents","Tool Integration","Toolformer: Language Models Can Teach Themselves to Use Tools","Paper","Schick et al. 2023","https://arxiv.org/abs/2302.04761","Self-supervised tool learning"],
+["Multi-Agent Systems (AutoGen)","Agents","Multi-Agent","AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation","Paper","Wu et al. 2023","https://arxiv.org/abs/2308.08155","Microsoft AutoGen multi-agent framework"],
+["MemGPT","Agents","Agent Systems","MemGPT: Towards LLMs as Operating Systems","Paper","Packer et al. 2023","https://arxiv.org/abs/2310.08560","External memory management for LLM agents"],
+["GLUE / SuperGLUE","Evaluation","Benchmarks","GLUE: A Multi-Task Benchmark and Analysis Platform","Paper","Wang et al. 2019","https://arxiv.org/abs/1804.07461","Classic NLP benchmark suite"],
+["MMLU","Evaluation","Benchmarks","MMLU: Massive Multitask Language Understanding","Paper","Hendrycks et al. 2021","https://arxiv.org/abs/2009.03300","57-subject knowledge benchmark - standard LLM eval"],
+["BIG-Bench","Evaluation","Benchmarks","BIG-Bench: Beyond the Imitation Game","Paper","Srivastava et al. 2023","https://arxiv.org/abs/2206.04615","204 tasks from 132 institutions"],
+["TruthfulQA","Evaluation","Benchmarks","TruthfulQA: Measuring How Models Mimic Human Falsehoods","Paper","Lin et al. 2022","https://arxiv.org/abs/2109.07958","Truthfulness evaluation benchmark"],
+["HumanEval","Evaluation","Benchmarks","HumanEval: Code Generation Evaluation","Paper","Chen et al. 2021","https://arxiv.org/abs/2107.03374","Functional code generation benchmark"],
+["LLM-as-Judge","Evaluation","LLM Evaluation","Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena","Paper","Zheng et al. 2023","https://arxiv.org/abs/2306.05685","LLM evaluation using GPT-4 as judge"],
+["Hallucination Survey","Evaluation","Failure Modes","Survey of Hallucination in Natural Language Generation","Paper","Ji et al. 2023","https://arxiv.org/abs/2202.03629","Comprehensive hallucination survey"],
+["Chatbot Arena","Evaluation","LLM Evaluation","LMSYS Chatbot Arena Leaderboard","Leaderboard","LMSYS","https://chat.lmsys.org","Elo-based human preference evaluation"],
+["Mechanistic Interpretability","Interpretability & Safety","Mechanistic Interpretability","A Mathematical Framework for Transformer Circuits","Paper","Elhage et al. 2021","https://transformer-circuits.pub/2021/framework/index.html","Foundational mechanistic interpretability paper"],
+["Induction Heads","Interpretability & Safety","Mechanistic Interpretability","In-context Learning and Induction Heads","Paper","Olsson et al. 2022","https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html","Induction heads - key mechanistic interpretability finding"],
+["Superposition","Interpretability & Safety","Mechanistic Interpretability","Toy Models of Superposition","Paper","Elhage et al. 2022","https://transformer-circuits.pub/2022/toy_model/index.html","How neural networks represent more features than dimensions"],
+["Sparse Autoencoders","Interpretability & Safety","Mechanistic Interpretability","Towards Monosemanticity: Decomposing Language Models with Dictionary Learning","Paper","Bricken et al. 2023","https://transformer-circuits.pub/2023/monosemantic-features/index.html","Sparse autoencoders for interpretable features"],
+["Jailbreaking & Red Teaming","Interpretability & Safety","Safety","Universal and Transferable Adversarial Attacks on Aligned Language Models","Paper","Zou et al. 2023","https://arxiv.org/abs/2307.15043","GCG attack - universal jailbreaking suffix"],
+["Scalable Oversight","Interpretability & Safety","Safety","Scalable agent alignment via reward modeling","Paper","Leike et al. 2018","https://arxiv.org/abs/1811.07871","Foundational scalable oversight paper"],
+["Debate","Interpretability & Safety","Safety","AI Safety via Debate","Paper","Irving et al. 2018","https://arxiv.org/abs/1805.00899","Debate as alignment technique"],
+["Continual Learning","Advanced Topics","Catastrophic Forgetting","Continual Learning for Natural Language Processing","Paper","Biesialska et al. 2020","https://arxiv.org/abs/2211.09377","Survey of continual learning in NLP"],
+["Long Context LLMs","Advanced Topics","Context Length","Lost in the Middle: How Language Models Use Long Contexts","Paper","Liu et al. 2023","https://arxiv.org/abs/2307.03172","LLMs struggle with info in middle of long contexts"],
+["Watermarking LLMs","Advanced Topics","Attribution","A Watermark for Large Language Models","Paper","Kirchenbauer et al. 2023","https://arxiv.org/abs/2301.10226","Detecting LLM-generated text via watermarking"],
+["SimCSE","Representation Learning","Self-Supervised","SimCSE: Simple Contrastive Learning of Sentence Embeddings","Paper","Gao et al. 2021","https://arxiv.org/abs/2104.08821","Contrastive sentence embeddings using dropout as augmentation"],
+["Stanford CS224N","Courses","Comprehensive","Stanford CS224N: NLP with Deep Learning","Course (Free)","Christopher Manning","https://web.stanford.edu/class/cs224n/","The gold standard NLP course - videos slides assignments all free"],
+["Hugging Face NLP Course","Courses","Comprehensive","Hugging Face NLP Course","Course (Free)","Hugging Face","https://huggingface.co/learn/nlp-course","Practical transformers and fine-tuning with code"],
+["fast.ai Deep Learning","Courses","Comprehensive","fast.ai Practical Deep Learning for Coders","Course (Free)","Jeremy Howard","https://course.fast.ai","Top-down practical deep learning - great for NLP intuition"],
+["CMU CS 11-711","Courses","Comprehensive","CMU CS 11-711 Advanced NLP","Course (Free)","CMU","https://www.youtube.com/@neubig","Graduate-level NLP course on YouTube"],
+["AGI Safety / Alignment Course","Courses","Alignment","AGI Safety Fundamentals - Alignment Course","Course (Free)","BlueDot Impact","https://aisafetyfundamentals.com","Free structured alignment curriculum"],
+["Andrej Karpathy Blog","Research Blogs","Key Research Sources","Andrej Karpathy Blog + YouTube","Blog + YouTube","Andrej Karpathy","https://karpathy.ai","Extremely clear neural net / LLM explanations"],
+["Lilian Weng Blog","Research Blogs","Key Research Sources","Lil'Log by Lilian Weng","Blog (Free)","Lilian Weng","https://lilianweng.github.io","Outstanding survey blog posts on NLP RL and alignment"],
+["Anthropic Research Blog","Research Blogs","Key Research Sources","Anthropic Research Blog","Blog","Anthropic","https://www.anthropic.com/research","CAI RLHF interpretability and safety papers"],
+["OpenAI Research Blog","Research Blogs","Key Research Sources","OpenAI Research Blog","Blog","OpenAI","https://openai.com/research","GPT RLHF o1 and alignment research"],
+["Sebastian Ruder Blog","Research Blogs","Key Research Sources","Sebastian Ruder's Blog","Blog (Free)","Sebastian Ruder","https://ruder.io","Transfer learning NLP research blog"],
+["Papers With Code NLP","Research Aggregators","Key Research Sources","NLP on Papers With Code","Leaderboard","Papers With Code","https://paperswithcode.com/area/natural-language-processing","Track SOTA across all NLP tasks"],
+["Yannic Kilcher","YouTube","Key YouTube Channels","Yannic Kilcher Paper Walkthroughs","YouTube","Yannic Kilcher","https://www.youtube.com/@YannicKilcher","Best paper reading channel - covers major NLP papers"],
+["Andrej Karpathy YouTube","YouTube","Key YouTube Channels","Andrej Karpathy Neural Networks Zero to Hero","YouTube","Andrej Karpathy","https://www.youtube.com/@AndrejKarpathy","Build GPT from scratch series - essential watch"],
+["StatQuest","YouTube","Key YouTube Channels","StatQuest with Josh Starmer","YouTube","Josh Starmer","https://www.youtube.com/@statquest","Attention transformers and ML concepts clearly explained"],
+["Aleksa Gordić AI Epiphany","YouTube","Key YouTube Channels","The AI Epiphany","YouTube","Aleksa Gordić","https://www.youtube.com/@TheAIEpiphany","Deep paper walkthroughs transformer implementations"],
+["Umar Jamil","YouTube","Key YouTube Channels","Umar Jamil NLP Implementations","YouTube","Umar Jamil","https://www.youtube.com/@umarjamilai","Implements transformers LLAMA DPO from scratch"],
+["PyTorch","Libraries & Tools","Core Libraries","PyTorch Documentation","Documentation","PyTorch","https://pytorch.org/docs","Core DL framework for NLP and LLMs"],
+["Hugging Face Transformers","Libraries & Tools","Core Libraries","Hugging Face Transformers Documentation","Documentation","Hugging Face","https://huggingface.co/docs/transformers","The standard library for pre-trained models"],
+["PEFT Library","Libraries & Tools","Fine-tuning","PEFT Library Documentation","Documentation","Hugging Face","https://huggingface.co/docs/peft","LoRA QLoRA and other PEFT methods"],
+["TRL Library","Libraries & Tools","RLHF","TRL: Transformer Reinforcement Learning Documentation","Documentation","Hugging Face","https://huggingface.co/docs/trl","RLHF SFT DPO PPO training library"],
+["LangChain","Libraries & Tools","Agents & RAG","LangChain Documentation","Documentation","LangChain","https://python.langchain.com","Chains agents RAG for LLM applications"],
+["LlamaIndex","Libraries & Tools","Agents & RAG","LlamaIndex Documentation","Documentation","LlamaIndex","https://docs.llamaindex.ai","Data framework for RAG applications"],
+["Sentence Transformers","Libraries & Tools","Embeddings","Sentence Transformers Documentation","Documentation","Reimers & Gurevych","https://www.sbert.net","Sentence and paragraph embeddings library"],
+["Weights & Biases","Libraries & Tools","Experiment Tracking","Weights & Biases Documentation","Documentation","W&B","https://docs.wandb.ai","Experiment tracking essential for LLM training"],
+["Axolotl","Libraries & Tools","Fine-tuning","Axolotl Documentation","Documentation","OpenAccess AI Collective","https://github.com/OpenAccess-AI-Collective/axolotl","Streamlined fine-tuning framework for LLMs"],
+["DeepSpeed Library","Libraries & Tools","Training","DeepSpeed Documentation","Documentation","Microsoft","https://www.deepspeed.ai","Distributed training and inference optimization"],
+];
+
+// ─── CATEGORY CONFIG ─────────────────────────────────────────────────
+const catConfig = {
+  "Math Foundations":        { id:"math",            color:"var(--cat-math)",          emoji:"∑" },
+  "NLP Fundamentals":        { id:"fundamentals",    color:"var(--cat-fundamentals)",   emoji:"📝" },
+  "Classical NLP":           { id:"classical",       color:"var(--cat-classical)",      emoji:"📊" },
+  "Word Embeddings":         { id:"embeddings",      color:"var(--cat-embeddings)",     emoji:"⬡" },
+  "Neural NLP":              { id:"neural",          color:"var(--cat-neural)",         emoji:"🧠" },
+  "Transformers":            { id:"transformers",    color:"var(--cat-transformers)",   emoji:"⚡" },
+  "Large Language Models":   { id:"llm",             color:"var(--cat-llm)",            emoji:"🌐" },
+  "LLM Training":            { id:"llm",             color:"var(--cat-llm)",            emoji:"🛠" },
+  "Fine-tuning & Alignment": { id:"finetuning",      color:"var(--cat-finetuning)",     emoji:"🎯" },
+  "Reinforcement Learning":  { id:"rl",              color:"var(--cat-rl)",             emoji:"♟" },
+  "Reasoning & Inference":   { id:"reasoning",       color:"var(--cat-reasoning)",      emoji:"💡" },
+  "Generation":              { id:"generation",      color:"var(--cat-generation)",     emoji:"✍" },
+  "NLP Applications":        { id:"applications",    color:"var(--cat-applications)",   emoji:"🔧" },
+  "Multimodal":              { id:"multimodal",      color:"var(--cat-multimodal)",     emoji:"👁" },
+  "Deployment & Efficiency": { id:"deployment",      color:"var(--cat-deployment)",     emoji:"🚀" },
+  "Agents":                  { id:"agents",          color:"var(--cat-agents)",         emoji:"🤖" },
+  "Evaluation":              { id:"eval",            color:"var(--cat-eval)",           emoji:"📈" },
+  "Interpretability & Safety":{ id:"interpretability",color:"var(--cat-interpretability)",emoji:"🔍" },
+  "Representation Learning": { id:"advanced",        color:"var(--cat-advanced)",       emoji:"🧬" },
+  "Advanced Topics":         { id:"advanced",        color:"var(--cat-advanced)",       emoji:"🔬" },
+  "Courses":                 { id:"courses",         color:"var(--cat-courses)",        emoji:"🎓" },
+  "Research Blogs":          { id:"blogs",           color:"var(--cat-blogs)",          emoji:"📰" },
+  "Research Aggregators":    { id:"blogs",           color:"var(--cat-blogs)",          emoji:"🗂" },
+  "YouTube":                 { id:"youtube",         color:"var(--cat-youtube)",        emoji:"▶" },
+  "Libraries & Tools":       { id:"tools",           color:"var(--cat-tools)",          emoji:"⚙" },
+};
+
+// ─── BUILD STRUCTURE ─────────────────────────────────────────────────
+let structure = {}; // category -> subcategory -> topic -> [resources]
+let allTopics = new Set();
+
+rawData.forEach(row => {
+  const [topic, cat, subcat, title, type, author, link, notes] = row;
+  allTopics.add(topic);
+  if (!structure[cat]) structure[cat] = {};
+  if (!structure[cat][subcat]) structure[cat][subcat] = {};
+  if (!structure[cat][subcat][topic]) structure[cat][subcat][topic] = [];
+  structure[cat][subcat][topic].push({ title, type, author, link, notes });
+});
+
+// ─── UPDATE STATS ────────────────────────────────────────────────────
+document.getElementById('totalTopics').textContent = allTopics.size;
+document.getElementById('totalResources').textContent = rawData.length;
+
+// ─── TYPE CLASSIFICATION ─────────────────────────────────────────────
+function classifyType(t) {
+  const tl = t.toLowerCase();
+  if (tl.includes('paper') || tl.includes('arxiv')) return 'paper';
+  if (tl.includes('book')) return 'book';
+  if (tl.includes('course')) return 'course';
+  if (tl.includes('youtube') || tl.includes('playlist') || tl.includes('video')) return 'youtube';
+  if (tl.includes('blog') || tl.includes('article')) return 'article';
+  if (tl.includes('doc') || tl.includes('documentation')) return 'doc';
+  if (tl.includes('dataset') || tl.includes('data') || tl.includes('leaderboard') || tl.includes('feed')) return 'dataset';
+  return 'other';
+}
+
+function typeClass(t) {
+  const k = classifyType(t);
+  const map = { paper:'type-paper', book:'type-book', course:'type-course', youtube:'type-youtube', article:'type-article', doc:'type-doc', dataset:'type-dataset', other:'type-other' };
+  return map[k] || 'type-other';
+}
+
+function linkHref(link) {
+  if (link.startsWith('http')) return link;
+  if (link.startsWith('arXiv:') || link.startsWith('arXiv ')) {
+    const id = link.split(':')[1]?.trim() || link.split(' ')[1]?.trim();
+    return `https://arxiv.org/abs/${id}`;
+  }
+  return '#';
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────
+let currentTypeFilter = 'all';
+
+function render() {
+  const container = document.getElementById('topicsMain');
+  container.innerHTML = '';
+
+  Object.entries(structure).forEach(([cat, subcats]) => {
+    const cfg = catConfig[cat] || { id: 'other', color: '#888', emoji: '•' };
+    const totalResources = Object.values(subcats).flatMap(s => Object.values(s).flat()).length;
+
+    const block = document.createElement('div');
+    block.className = 'category-block';
+    block.id = `section-${cfg.id}`;
+    block.dataset.cat = cfg.id;
+
+    // Category header
+    const hdr = document.createElement('div');
+    hdr.className = 'category-header';
+    hdr.innerHTML = `
+      <div class="cat-dot" style="background:${cfg.color}"></div>
+      <span class="cat-title">${cfg.emoji} ${cat}</span>
+      <span class="cat-count">${totalResources} resources</span>
+    `;
+    block.appendChild(hdr);
+
+    // Subcategories
+    Object.entries(subcats).forEach(([subcat, topics]) => {
+      const subDiv = document.createElement('div');
+      subDiv.className = 'subcategory';
+
+      const slabel = document.createElement('div');
+      slabel.className = 'subcat-label';
+      slabel.textContent = subcat;
+      subDiv.appendChild(slabel);
+
+      const grid = document.createElement('div');
+      grid.className = 'topics-grid';
+
+      Object.entries(topics).forEach(([topic, resources]) => {
+        const card = document.createElement('div');
+        card.className = 'topic-card';
+        card.dataset.topic = topic.toLowerCase();
+        card.dataset.resources = JSON.stringify(resources).toLowerCase();
+
+        const topHdr = document.createElement('div');
+        topHdr.className = 'topic-header';
+        topHdr.innerHTML = `<span class="topic-name">${topic}</span><span class="expand-icon">›</span>`;
+        topHdr.onclick = () => {
+          card.classList.toggle('expanded');
+        };
+
+        const resDiv = document.createElement('div');
+        resDiv.className = 'topic-resources';
+
+        resources.forEach(r => {
+          const href = linkHref(r.link);
+          const tc = typeClass(r.type);
+          const ri = document.createElement('div');
+          ri.className = 'resource-item';
+          ri.dataset.type = classifyType(r.type);
+          ri.innerHTML = `
+            <div class="resource-top">
+              <span class="resource-type ${tc}">${r.type}</span>
+              <span class="resource-title">${r.title}</span>
+            </div>
+            <div class="resource-meta">
+              <span class="resource-author">${r.author}</span>
+              ${href !== '#' ? `<a class="resource-link" href="${href}" target="_blank" rel="noopener">${href.length > 50 ? href.substring(0,47)+'…' : href}</a>` : ''}
+            </div>
+            ${r.notes ? `<div class="resource-note">${r.notes}</div>` : ''}
+          `;
+          resDiv.appendChild(ri);
+        });
+
+        card.appendChild(topHdr);
+        card.appendChild(resDiv);
+        grid.appendChild(card);
+      });
+
+      subDiv.appendChild(grid);
+      block.appendChild(subDiv);
+    });
+
+    container.appendChild(block);
+  });
+
+  filterContent();
+}
+
+// ─── FILTER ──────────────────────────────────────────────────────────
+function filterContent() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  let visCount = 0;
+
+  document.querySelectorAll('.topic-card').forEach(card => {
+    const topicMatch = card.dataset.topic.includes(q) || q === '';
+    const resourcesMatch = card.dataset.resources.includes(q);
+    const typeMatch = currentTypeFilter === 'all' || card.querySelectorAll(`.resource-item[data-type="${currentTypeFilter}"]`).length > 0;
+
+    const show = (topicMatch || resourcesMatch) && typeMatch;
+    card.classList.toggle('hidden', !show);
+    if (show) visCount++;
+
+    // Show relevant resources
+    card.querySelectorAll('.resource-item').forEach(ri => {
+      const resTypeOk = currentTypeFilter === 'all' || ri.dataset.type === currentTypeFilter;
+      ri.style.display = resTypeOk ? '' : 'none';
+    });
+  });
+
+  // Auto-expand cards on search
+  if (q.length > 1) {
+    document.querySelectorAll('.topic-card:not(.hidden)').forEach(c => c.classList.add('expanded'));
+  }
+
+  // Hide empty sections
+  document.querySelectorAll('.category-block').forEach(block => {
+    const visible = block.querySelectorAll('.topic-card:not(.hidden)').length;
+    block.style.display = visible === 0 ? 'none' : '';
+  });
+
+  document.getElementById('resultsCount').textContent = q || currentTypeFilter !== 'all'
+    ? `${visCount} topics match`
+    : `${allTopics.size} topics total`;
+}
+
+function setTypeFilter(type, btn) {
+  currentTypeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterContent();
+}
+
+// ─── SCROLL NAV ──────────────────────────────────────────────────────
+function scrollToSection(id) {
+  const el = document.getElementById(`section-${id}`);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (id === 'roadmap') {
+    document.getElementById('roadmap').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// ─── PROGRESS BAR ────────────────────────────────────────────────────
+const progressBar = document.getElementById('progressBar');
+const backTop = document.getElementById('backTop');
+
+window.addEventListener('scroll', () => {
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+  progressBar.style.width = pct + '%';
+  backTop.classList.toggle('visible', window.scrollY > 400);
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────
+render();
+document.getElementById('resultsCount').textContent = `${allTopics.size} topics total`;
+</script>
 </body>
 </html>
